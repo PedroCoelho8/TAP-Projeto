@@ -1,0 +1,822 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          pj\domain\parsers\OrderParser.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package pj.domain.parsers
+</span>2 <span style=''>
+</span>3 <span style=''>import pj.domain.*
+</span>4 <span style=''>import pj.domain.DomainError.*
+</span>5 <span style=''>import pj.xml.XML.*
+</span>6 <span style=''>
+</span>7 <span style=''>import scala.xml.Node
+</span>8 <span style=''>
+</span>9 <span style=''>object OrderParser {
+</span>10 <span style=''>
+</span>11 <span style=''>  </span><span style='background: #AEF1AE'>def parseOrders</span><span style=''>(node: Node, validProductIds: Set[ProductId]): Result[List[Order]] =
+</span>12 <span style=''>    val orderNodes = </span><span style='background: #AEF1AE'>node \ &quot;Order&quot;</span><span style=''>
+</span>13 <span style=''>    </span><span style='background: #AEF1AE'>traverse(orderNodes, parseOrder(_, validProductIds))</span><span style=''>
+</span>14 <span style=''>
+</span>15 <span style=''>  </span><span style='background: #AEF1AE'>private def parseOrder</span><span style=''>(node: Node, validProductIds: Set[ProductId]): Result[Order] =
+</span>16 <span style=''>    </span><span style='background: #AEF1AE'>fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;
+</span>17 <span style=''></span><span style='background: #AEF1AE'>      if (!idStr.startsWith(&quot;ORD_&quot;))
+</span>18 <span style=''></span><span style='background: #AEF1AE'>        Left(InvalidOrderId(idStr))
+</span>19 <span style=''></span><span style='background: #AEF1AE'>      else
+</span>20 <span style=''></span><span style='background: #AEF1AE'>        fromAttribute(node, &quot;prdref&quot;).flatMap { productRefStr =&gt;
+</span>21 <span style=''></span><span style='background: #AEF1AE'>          val productId = ProductId(productRefStr)
+</span>22 <span style=''></span><span style='background: #AEF1AE'>          if (!validProductIds.contains(productId))
+</span>23 <span style=''></span><span style='background: #AEF1AE'>            Left(ProductDoesNotExist(productRefStr))
+</span>24 <span style=''></span><span style='background: #AEF1AE'>          else
+</span>25 <span style=''></span><span style='background: #AEF1AE'>            fromAttribute(node, &quot;quantity&quot;).flatMap { quantityStr =&gt;
+</span>26 <span style=''></span><span style='background: #AEF1AE'>              val quantity = quantityStr.toInt
+</span>27 <span style=''></span><span style='background: #AEF1AE'>
+</span>28 <span style=''></span><span style='background: #AEF1AE'>              if (quantity &lt;= 0)
+</span>29 <span style=''></span><span style='background: #AEF1AE'>                Left(InvalidQuantity(quantity))
+</span>30 <span style=''></span><span style='background: #AEF1AE'>              else
+</span>31 <span style=''></span><span style='background: #AEF1AE'>                println(&quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity)
+</span>32 <span style=''></span><span style='background: #AEF1AE'>                Right(Order(OrderId(idStr), productId, OrderQuantity(quantity)))
+</span>33 <span style=''></span><span style='background: #AEF1AE'>            }
+</span>34 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>35 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>36 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          38
+        </td>
+        <td>
+          155
+          -
+          170
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseOrders
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          def parseOrders
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          35
+        </td>
+        <td>
+          261
+          -
+          275
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          \\
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          node \\ &quot;Order&quot;
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          37
+        </td>
+        <td>
+          302
+          -
+          332
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseOrder
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          parseOrder(_, validProductIds)
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          36
+        </td>
+        <td>
+          281
+          -
+          333
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          traverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(orderNodes, parseOrder(_, validProductIds))
+        </td>
+      </tr><tr>
+        <td>
+          15
+        </td>
+        <td>
+          65
+        </td>
+        <td>
+          339
+          -
+          361
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseOrder
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          private def parseOrder
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          40
+        </td>
+        <td>
+          429
+          -
+          454
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          39
+        </td>
+        <td>
+          429
+          -
+          1220
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;\r\n      if (!idStr.startsWith(&quot;ORD_&quot;))\r\n        Left(InvalidOrderId(idStr))\r\n      else\r\n        fromAttribute(node, &quot;prdref&quot;).flatMap { productRefStr =&gt;\r\n          val productId = ProductId(productRefStr)\r\n          if (!validProductIds.contains(productId))\r\n            Left(ProductDoesNotExist(productRefStr))\r\n          else\r\n            fromAttribute(node, &quot;quantity&quot;).flatMap { quantityStr =&gt;\r\n              val quantity = quantityStr.toInt\r\n\r\n              if (quantity &lt;= 0)\r\n                Left(InvalidQuantity(quantity))\r\n              else\r\n                println(&quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity)\r\n                Right(Order(OrderId(idStr), productId, OrderQuantity(quantity)))\r\n            }\r\n        }\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          41
+        </td>
+        <td>
+          486
+          -
+          510
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          startsWith
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          idStr.startsWith(&quot;ORD_&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          43
+        </td>
+        <td>
+          521
+          -
+          548
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(InvalidOrderId(idStr))
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          42
+        </td>
+        <td>
+          521
+          -
+          525
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          44
+        </td>
+        <td>
+          570
+          -
+          1213
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;prdref&quot;).flatMap { productRefStr =&gt;\r\n          val productId = ProductId(productRefStr)\r\n          if (!validProductIds.contains(productId))\r\n            Left(ProductDoesNotExist(productRefStr))\r\n          else\r\n            fromAttribute(node, &quot;quantity&quot;).flatMap { quantityStr =&gt;\r\n              val quantity = quantityStr.toInt\r\n\r\n              if (quantity &lt;= 0)\r\n                Left(InvalidQuantity(quantity))\r\n              else\r\n                println(&quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity)\r\n                Right(Order(OrderId(idStr), productId, OrderQuantity(quantity)))\r\n            }\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          64
+        </td>
+        <td>
+          570
+          -
+          1213
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;prdref&quot;).flatMap { productRefStr =&gt;\r\n          val productId = ProductId(productRefStr)\r\n          if (!validProductIds.contains(productId))\r\n            Left(ProductDoesNotExist(productRefStr))\r\n          else\r\n            fromAttribute(node, &quot;quantity&quot;).flatMap { quantityStr =&gt;\r\n              val quantity = quantityStr.toInt\r\n\r\n              if (quantity &lt;= 0)\r\n                Left(InvalidQuantity(quantity))\r\n              else\r\n                println(&quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity)\r\n                Right(Order(OrderId(idStr), productId, OrderQuantity(quantity)))\r\n            }\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          45
+        </td>
+        <td>
+          570
+          -
+          599
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;prdref&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          46
+        </td>
+        <td>
+          695
+          -
+          730
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          contains
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validProductIds.contains(productId)
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          47
+        </td>
+        <td>
+          745
+          -
+          749
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          48
+        </td>
+        <td>
+          745
+          -
+          785
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(ProductDoesNotExist(productRefStr))
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          50
+        </td>
+        <td>
+          815
+          -
+          846
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;quantity&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          49
+        </td>
+        <td>
+          815
+          -
+          1202
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;quantity&quot;).flatMap { quantityStr =&gt;\r\n              val quantity = quantityStr.toInt\r\n\r\n              if (quantity &lt;= 0)\r\n                Left(InvalidQuantity(quantity))\r\n              else\r\n                println(&quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity)\r\n                Right(Order(OrderId(idStr), productId, OrderQuantity(quantity)))\r\n            }
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          63
+        </td>
+        <td>
+          815
+          -
+          1202
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;quantity&quot;).flatMap { quantityStr =&gt;\r\n              val quantity = quantityStr.toInt\r\n\r\n              if (quantity &lt;= 0)\r\n                Left(InvalidQuantity(quantity))\r\n              else\r\n                println(&quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity)\r\n                Right(Order(OrderId(idStr), productId, OrderQuantity(quantity)))\r\n            }
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          52
+        </td>
+        <td>
+          902
+          -
+          919
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toInt
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          quantityStr.toInt
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          51
+        </td>
+        <td>
+          902
+          -
+          913
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          augmentString
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          quantityStr
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          53
+        </td>
+        <td>
+          973
+          -
+          977
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          54
+        </td>
+        <td>
+          973
+          -
+          1004
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(InvalidQuantity(quantity))
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          59
+        </td>
+        <td>
+          1050
+          -
+          1074
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Order: &quot; + idStr + &quot;, &quot;
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          62
+        </td>
+        <td>
+          1042
+          -
+          1187
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          println(&quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity)\r\n                Right(Order(OrderId(idStr), productId, OrderQuantity(quantity)))
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          56
+        </td>
+        <td>
+          1050
+          -
+          1104
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          55
+        </td>
+        <td>
+          1042
+          -
+          1105
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          println
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          println(&quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot; + quantity)
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          58
+        </td>
+        <td>
+          1050
+          -
+          1086
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Order: &quot; + idStr + &quot;, &quot; + productId
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          60
+        </td>
+        <td>
+          1050
+          -
+          1067
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Order: &quot; + idStr
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          57
+        </td>
+        <td>
+          1050
+          -
+          1093
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Order: &quot; + idStr + &quot;, &quot; + productId + &quot;, &quot;
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          61
+        </td>
+        <td>
+          1123
+          -
+          1128
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Right
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

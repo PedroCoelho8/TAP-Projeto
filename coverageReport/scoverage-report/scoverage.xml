@@ -1,0 +1,1625 @@
+<scoverage 
+statement-count="437" statements-invoked="377" statement-rate="86.27" branch-rate="83.08" version="1.0" timestamp="1745709442116">
+    <packages>
+        <package name="pj.assessment" statement-count="4" statements-invoked="2" statement-rate="50.00">
+            <classes>
+                <class 
+                name="pj.assessment.AssessmentMS03" filename="pj\assessment\AssessmentFacade.scala" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="pj.assessment/AssessmentMS03/create" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="pj.assessment" class="AssessmentMS03" class-type="Object" full-class-name="pj.assessment.AssessmentMS03" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\assessment\AssessmentFacade.scala" method="create" start="331" end="355" line="11" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.assessment" class="AssessmentMS03" class-type="Object" full-class-name="pj.assessment.AssessmentMS03" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\assessment\AssessmentFacade.scala" method="create" start="293" end="303" line="11" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.assessment.AssessmentMS01" filename="pj\assessment\AssessmentFacade.scala" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="pj.assessment/AssessmentMS01/create" statement-count="2" statements-invoked="2" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.assessment" class="AssessmentMS01" class-type="Object" full-class-name="pj.assessment.AssessmentMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\assessment\AssessmentFacade.scala" method="create" start="184" end="194" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.assessment" class="AssessmentMS01" class-type="Object" full-class-name="pj.assessment.AssessmentMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\assessment\AssessmentFacade.scala" method="create" start="222" end="246" line="8" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="pj.domain.parsers" statement-count="236" statements-invoked="224" statement-rate="94.92">
+            <classes>
+                <class 
+                name="pj.domain.parsers.HumanParser" filename="pj\domain\parsers\HumanParser.scala" statement-count="31" statements-invoked="31" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="pj.domain.parsers/HumanParser/$anonfun" statement-count="22" statements-invoked="22" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="815" end="838" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="1205" end="1209" line="35" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="723" end="774" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="570" end="574" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="1149" end="1172" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="815" end="862" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="619" end="646" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="619" end="950" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="815" end="845" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="1174" end="1192" line="34" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="723" end="939" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="619" end="950" line="21" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="535" end="559" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="807" end="863" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="746" end="773" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="815" end="852" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="570" end="597" line="19" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="1174" end="1179" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="695" end="711" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="815" end="831" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="1205" end="1233" line="35" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="$anonfun" start="338" end="371" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/HumanParser/parseHumanResource" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHumanResource" start="478" end="957" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHumanResource" start="378" end="408" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHumanResource" start="478" end="503" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/HumanParser/parseHumanResources" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHumanResources" start="317" end="372" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHumanResources" start="297" end="311" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHumanResources" start="181" end="204" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/HumanParser/parseHandles" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHandles" start="963" end="987" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHandles" start="1057" end="1084" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="HumanParser" class-type="Object" full-class-name="pj.domain.parsers.HumanParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\HumanParser.scala" method="parseHandles" start="1057" end="1240" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.domain.parsers.ProductionParser" filename="pj\domain\parsers\ProductionParser.scala" statement-count="36" statements-invoked="36" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="pj.domain.parsers/ProductionParser/$anonfun" statement-count="33" statements-invoked="33" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1033" end="1148" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="984" end="1466" line="28" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="503" end="540" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="753" end="824" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="865" end="883" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="591" end="1466" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1124" end="1148" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="984" end="1466" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="670" end="736" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="377" end="540" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1172" end="1195" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="652" end="1466" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="935" end="972" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="377" end="1466" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="503" end="534" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="744" end="972" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1033" end="1466" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1158" end="1466" line="32" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1124" end="1142" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="847" end="884" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="561" end="583" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="548" end="1466" line="19" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="847" end="890" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1045" end="1098" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="548" end="1466" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="935" end="966" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1158" end="1466" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="613" end="644" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1213" end="1265" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="744" end="1466" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1000" end="1025" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="398" end="458" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="$anonfun" start="1203" end="1466" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/ProductionParser/parseProduction" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="parseProduction" start="297" end="1466" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="parseProduction" start="239" end="258" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductionParser" class-type="Object" full-class-name="pj.domain.parsers.ProductionParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductionParser.scala" method="parseProduction" start="335" end="369" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.domain.parsers.ProductParser" filename="pj\domain\parsers\ProductParser.scala" statement-count="25" statements-invoked="25" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="pj.domain.parsers/ProductParser/parseProduct" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProduct" start="434" end="848" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProduct" start="342" end="366" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProduct" start="434" end="459" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/ProductParser/$anonfun" statement-count="16" statements-invoked="16" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="681" end="729" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="1128" end="1132" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="526" end="530" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="577" end="604" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="1003" end="1025" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="681" end="830" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="1057" end="1108" line="31" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="491" end="515" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="577" end="841" line="20" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="577" end="841" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="526" end="555" line="18" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="311" end="335" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="653" end="669" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="1071" end="1076" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="704" end="728" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="$anonfun" start="1125" end="1158" line="33" branch="true" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/ProductParser/parseProducts" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProducts" start="288" end="336" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProducts" start="156" end="173" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProducts" start="266" end="282" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/ProductParser/parseProcess" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProcess" start="946" end="975" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProcess" start="854" end="878" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="ProductParser" class-type="Object" full-class-name="pj.domain.parsers.ProductParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\ProductParser.scala" method="parseProcess" start="946" end="1165" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.domain.parsers.TaskParser" filename="pj\domain\parsers\TaskParser.scala" statement-count="91" statements-invoked="79" statement-rate="86.81" branch-rate="84.62">
+                    <methods>
+                        <method 
+                        name="pj.domain.parsers/TaskParser/$anonfun" statement-count="75" statements-invoked="63" statement-rate="84.00" branch-rate="84.62">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3071" end="3107" line="62" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3392" end="3396" line="68" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2446" end="2478" line="51" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1248" end="1374" line="32" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2574" end="2676" line="54" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1937" end="1944" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="950" end="1143" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3797" end="3812" line="76" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2064" end="2089" line="46" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1445" end="1488" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1779" end="1803" line="39" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1076" end="1132" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2036" end="3350" line="46" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3797" end="3802" line="76" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1933" end="1960" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1445" end="1529" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2831" end="2888" line="58" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1028" end="1072" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3039" end="3141" line="62" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3374" end="3442" line="67" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2503" end="2528" line="53" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3834" end="3876" line="78" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3266" end="3271" line="65" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2606" end="2674" line="54" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2994" end="3016" line="61" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="697" end="875" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1288" end="1372" line="32" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1445" end="1508" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1814" end="1840" line="40" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2105" end="2200" line="47" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1561" end="1576" line="34" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="922" end="1152" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1288" end="1351" line="32" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2411" end="2479" line="51" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2606" end="2653" line="54" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3071" end="3098" line="62" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1933" end="1951" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="531" end="591" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1862" end="1889" line="42" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2783" end="3333" line="58" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1564" end="1569" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2606" end="2642" line="54" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3071" end="3139" line="62" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2337" end="2368" line="50" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3728" end="3786" line="75" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1408" end="1412" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3411" end="3440" line="68" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2804" end="2889" line="58" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3071" end="3118" line="62" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1002" end="1073" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3834" end="3838" line="78" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1937" end="1950" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2503" end="2553" line="53" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1814" end="1818" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2931" end="2950" line="59" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3195" end="3243" line="64" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1251" end="1255" line="32" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1445" end="1497" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="669" end="884" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2105" end="3350" line="47" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2574" end="2578" line="54" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1288" end="1340" line="32" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="808" end="864" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1862" end="3453" line="42" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3187" end="3244" line="64" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2531" end="2553" line="53" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2856" end="2887" line="58" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1405" end="1531" line="33" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1862" end="3453" line="42" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="1288" end="1331" line="32" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3039" end="3043" line="62" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="749" end="805" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2143" end="2199" line="47" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="3187" end="3333" line="64" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="$anonfun" start="2606" end="2633" line="54" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/TaskParser/parseTasks" statement-count="10" statements-invoked="10" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="177" end="191" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="466" end="479" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="600" end="1583" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="325" end="442" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="377" end="413" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="431" end="441" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="503" end="592" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="325" end="420" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="431" end="435" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTasks" start="377" end="419" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/TaskParser/parseTask" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTask" start="1722" end="1747" line="38" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTask" start="1722" end="3460" line="38" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="parseTask" start="1589" end="1610" line="37" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/TaskParser/validatePhysicalResourceType" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="validatePhysicalResourceType" start="3594" end="3883" line="73" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="validatePhysicalResourceType" start="3466" end="3506" line="72" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="TaskParser" class-type="Object" full-class-name="pj.domain.parsers.TaskParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\TaskParser.scala" method="validatePhysicalResourceType" start="3594" end="3621" line="73" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.domain.parsers.PhysicalParser" filename="pj\domain\parsers\PhysicalParser.scala" statement-count="22" statements-invoked="22" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="pj.domain.parsers/PhysicalParser/$anonfun" statement-count="16" statements-invoked="16" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="761" end="780" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="647" end="674" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="582" end="886" line="20" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="337" end="358" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="753" end="798" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="530" end="560" line="18" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="761" end="787" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="530" end="534" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="753" end="875" line="24" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="582" end="609" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="689" end="723" line="22" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="689" end="693" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="495" end="519" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="761" end="797" line="24" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="812" end="817" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="$anonfun" start="582" end="886" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/PhysicalParser/parsePhysicalResource" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="parsePhysicalResource" start="438" end="463" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="parsePhysicalResource" start="438" end="893" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="parsePhysicalResource" start="365" end="398" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/PhysicalParser/parsePhysicalResources" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="parsePhysicalResources" start="313" end="359" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="parsePhysicalResources" start="198" end="224" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="PhysicalParser" class-type="Object" full-class-name="pj.domain.parsers.PhysicalParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\PhysicalParser.scala" method="parsePhysicalResources" start="290" end="307" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.domain.parsers.OrderParser" filename="pj\domain\parsers\OrderParser.scala" statement-count="31" statements-invoked="31" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="pj.domain.parsers/OrderParser/$anonfun" statement-count="25" statements-invoked="25" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="815" end="846" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="1050" end="1074" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="486" end="510" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="973" end="977" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="1042" end="1187" line="31" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="570" end="1213" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="1050" end="1104" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="745" end="749" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="695" end="730" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="1042" end="1105" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="570" end="1213" line="20" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="1050" end="1086" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="815" end="1202" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="521" end="548" line="18" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="902" end="919" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="1123" end="1128" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="302" end="332" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="1050" end="1067" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="815" end="1202" line="25" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="570" end="599" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="973" end="1004" line="29" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="745" end="785" line="23" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="1050" end="1093" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="521" end="525" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="$anonfun" start="902" end="913" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/OrderParser/parseOrders" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="parseOrders" start="261" end="275" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="parseOrders" start="155" end="170" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="parseOrders" start="281" end="333" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.parsers/OrderParser/parseOrder" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="parseOrder" start="339" end="361" line="15" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="parseOrder" start="429" end="454" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.parsers" class="OrderParser" class-type="Object" full-class-name="pj.domain.parsers.OrderParser" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\parsers\OrderParser.scala" method="parseOrder" start="429" end="1220" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="pj.domain.schedule" statement-count="68" statements-invoked="57" statement-rate="83.82">
+            <classes>
+                <class 
+                name="pj.domain.schedule.ScheduleMS01" filename="pj\domain\schedule\ScheduleMS01.scala" statement-count="66" statements-invoked="57" statement-rate="86.36" branch-rate="77.27">
+                    <methods>
+                        <method 
+                        name="pj.domain.schedule/ScheduleMS01/$anonfun" statement-count="46" statements-invoked="43" statement-rate="93.48" branch-rate="80.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1133" end="1196" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="3490" end="3514" line="66" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1786" end="1969" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1017" end="1027" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="729" end="3580" line="20" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2455" end="2489" line="48" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2026" end="2026" line="44" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2029" end="2864" line="45" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1363" end="1399" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1343" end="3449" line="32" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="584" end="612" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2616" end="2658" line="50" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2832" end="2864" line="52" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="837" end="869" line="23" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1515" end="1591" line="35" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2243" end="2312" line="46" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="753" end="799" line="22" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2724" end="2780" line="51" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1455" end="1624" line="34" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="974" end="974" line="26" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2085" end="2095" line="44" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="938" end="3580" line="26" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2416" end="2453" line="48" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1017" end="1021" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2205" end="2864" line="45" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1455" end="1631" line="36" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="3429" end="3448" line="64" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1242" end="1261" line="29" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1851" end="1905" line="41" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="535" end="3639" line="19" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="583" end="3580" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2580" end="2659" line="50" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1851" end="1936" line="41" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2373" end="2490" line="47" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="3334" end="3356" line="61" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="580" end="580" line="19" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1363" end="1405" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="584" end="585" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2745" end="2779" line="51" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1103" end="3449" line="27" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2085" end="2089" line="44" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="1515" end="1563" line="35" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2269" end="2311" line="46" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="3553" end="3579" line="67" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="977" end="3449" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="$anonfun" start="2538" end="2864" line="49" branch="true" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.domain.schedule/ScheduleMS01/create" statement-count="20" statements-invoked="14" statement-rate="70.00" branch-rate="71.43">
+                            <statements>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="425" end="435" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3917" end="3999" line="78" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3823" end="3828" line="74" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3866" end="3878" line="75" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="425" end="429" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3929" end="3933" line="79" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="391" end="391" line="16" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="298" end="302" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="225" end="3878" line="12" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3772" end="3807" line="73" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3983" end="3995" line="79" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="225" end="262" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3869" end="3873" line="75" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="394" end="3639" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="358" end="3878" line="16" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3955" end="3997" line="79" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3653" end="3698" line="71" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="295" end="309" line="13" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="3758" end="3837" line="73" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS01" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS01" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS01.scala" method="create" start="171" end="181" line="10" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.domain.schedule.ScheduleMS03" filename="pj\domain\schedule\ScheduleMS03.scala" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="pj.domain.schedule/ScheduleMS03/create" statement-count="2" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS03" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS03" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS03.scala" method="create" start="364" end="374" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.domain.schedule" class="ScheduleMS03" class-type="Object" full-class-name="pj.domain.schedule.ScheduleMS03" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\domain\schedule\ScheduleMS03.scala" method="create" start="402" end="405" line="12" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="pj.io" statement-count="45" statements-invoked="14" statement-rate="31.11">
+            <classes>
+                <class 
+                name="pj.io.FileIO" filename="pj\io\FileIO.scala" statement-count="42" statements-invoked="14" statement-rate="33.33" branch-rate="25.00">
+                    <methods>
+                        <method 
+                        name="pj.io/FileIO/$anonfun" statement-count="22" statements-invoked="5" statement-rate="22.73" branch-rate="25.00">
+                            <statements>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1114" end="1119" line="37" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1440" end="1455" line="48" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="442" end="447" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1519" end="1524" line="49" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="940" end="944" line="34" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="666" end="678" line="26" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1345" end="1349" line="46" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1035" end="1050" line="36" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="647" end="651" line="26" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1007" end="1023" line="35" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="419" end="431" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1052" end="1101" line="36" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1412" end="1428" line="47" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1457" end="1506" line="48" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1114" end="1128" line="37" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1457" end="1461" line="48" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1519" end="1533" line="49" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="959" end="971" line="34" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1364" end="1376" line="46" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="689" end="694" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="1052" end="1056" line="36" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="$anonfun" start="400" end="404" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.io/FileIO/loadError" statement-count="8" statements-invoked="4" statement-rate="50.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="loadError" start="905" end="1136" line="34" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="loadError" start="1314" end="1541" line="46" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="loadError" start="1318" end="1333" line="46" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="loadError" start="1268" end="1281" line="45" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="loadError" start="853" end="866" line="33" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="loadError" start="909" end="928" line="34" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="loadError" start="905" end="929" line="34" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="loadError" start="1314" end="1334" line="46" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method name="pj.io/FileIO/save" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="save" start="1742" end="1750" line="60" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="save" start="1806" end="1823" line="61" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="save" start="1806" end="1828" line="61" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+                        </method>
+                        <method 
+                        name="pj.io/FileIO/&lt;init&gt;" statement-count="1" statements-invoked="1" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="&lt;init&gt;" start="1603" end="1628" line="53" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.io/FileIO/load" statement-count="8" statements-invoked="4" statement-rate="50.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="load" start="616" end="636" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="load" start="372" end="388" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="load" start="368" end="389" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="load" start="577" end="585" line="25" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="load" start="616" end="700" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="load" start="620" end="635" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="load" start="368" end="453" line="18" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="FileIO" class-type="Object" full-class-name="pj.io.FileIO" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="load" start="326" end="334" line="17" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.io.$anon" filename="pj\io\FileIO.scala" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                    <methods>
+                        <method 
+                        name="pj.io/$anon/&lt;init&gt;" statement-count="3" statements-invoked="0" statement-rate="0.00" branch-rate="0.00">
+                            <statements>
+                                <statement 
+                                package="pj.io" class="$anon" class-type="Class" full-class-name="pj.io.$anon" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="&lt;init&gt;" start="1859" end="1910" line="62" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="$anon" class-type="Class" full-class-name="pj.io.$anon" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="&lt;init&gt;" start="1932" end="1939" line="62" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.io" class="$anon" class-type="Class" full-class-name="pj.io.$anon" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\io\FileIO.scala" method="&lt;init&gt;" start="1912" end="1930" line="62" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+        <package name="pj.xml" statement-count="84" statements-invoked="80" statement-rate="95.24">
+            <classes>
+                <class 
+                name="pj.xml.XMLWriter" filename="pj\xml\XMLWriter.scala" statement-count="55" statements-invoked="51" statement-rate="92.73" branch-rate="50.00">
+                    <methods>
+                        <method 
+                        name="pj.xml/XMLWriter/toXmlError" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlError" start="297" end="311" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlError" start="223" end="237" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlError" start="274" end="316" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XMLWriter/toXmlFile" statement-count="18" statements-invoked="14" statement-rate="77.78" branch-rate="50.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="417" end="1491" line="16" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1574" end="1586" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1280" end="1300" line="36" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1420" end="1443" line="40" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="441" end="1086" line="16" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1226" end="1314" line="36" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1177" end="1202" line="35" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1475" end="1480" line="43" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1280" end="1314" line="36" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1545" end="1588" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1386" end="1412" line="39" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="321" end="334" line="14" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1341" end="1365" line="38" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1528" end="1590" line="45" branch="true" invocation-count="0" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1451" end="1465" line="41" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1115" end="1147" line="33" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1226" end="1277" line="36" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlFile" start="1531" end="1535" line="45" branch="false" invocation-count="0" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XMLWriter/toXmlSchedule" statement-count="5" statements-invoked="5" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlSchedule" start="1871" end="1884" line="52" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlSchedule" start="1785" end="1861" line="51" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlSchedule" start="1663" end="1903" line="48" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlSchedule" start="1785" end="1861" line="51" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlSchedule" start="1596" end="1621" line="47" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XMLWriter/toXmlHuman" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlHuman" start="2612" end="2634" line="73" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlHuman" start="2668" end="2694" line="74" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlHuman" start="2680" end="2689" line="74" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XMLWriter/toXmlPhysical" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlPhysical" start="2365" end="2390" line="65" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlPhysical" start="2425" end="2453" line="66" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlPhysical" start="2438" end="2448" line="66" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XMLWriter/toXmlTaskSchedule" statement-count="8" statements-invoked="8" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlTaskSchedule" start="1908" end="1937" line="55" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlTaskSchedule" start="2133" end="2135" line="56" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlTaskSchedule" start="2076" end="2083" line="56" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlTaskSchedule" start="2100" end="2110" line="56" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlTaskSchedule" start="2155" end="2168" line="57" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlTaskSchedule" start="2142" end="2144" line="56" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlTaskSchedule" start="2118" end="2124" line="56" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlTaskSchedule" start="2056" end="2191" line="56" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XMLWriter/toXmlPhysicalResources" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlPhysicalResources" start="2198" end="2232" line="60" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlPhysicalResources" start="2309" end="2330" line="62" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlPhysicalResources" start="2282" end="2358" line="61" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XMLWriter/$anonfun" statement-count="9" statements-invoked="9" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="770" end="810" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="1019" end="1023" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="598" end="644" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="536" end="559" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="710" end="734" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="1019" end="1066" line="29" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="822" end="1077" line="23" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="505" end="560" line="17" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="$anonfun" start="682" end="735" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XMLWriter/toXmlHumanResources" statement-count="3" statements-invoked="3" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlHumanResources" start="2460" end="2491" line="68" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlHumanResources" start="2562" end="2580" line="70" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XMLWriter" class-type="Object" full-class-name="pj.xml.XMLWriter" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XMLWriter.scala" method="toXmlHumanResources" start="2538" end="2605" line="69" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+                <class 
+                name="pj.xml.XML" filename="pj\xml\XML.scala" statement-count="29" statements-invoked="29" statement-rate="100.00" branch-rate="100.00">
+                    <methods>
+                        <method 
+                        name="pj.xml/XML/fromAttribute" statement-count="9" statements-invoked="9" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="595" end="645" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="658" end="663" line="21" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="549" end="557" line="19" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="475" end="492" line="18" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="581" end="585" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="581" end="647" line="20" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="658" end="669" line="21" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="567" end="579" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromAttribute" start="634" end="643" line="20" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XML/traverse" statement-count="6" statements-invoked="6" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="traverse" start="884" end="890" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="traverse" start="848" end="1004" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="traverse" start="775" end="787" line="26" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="traverse" start="878" end="883" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="traverse" start="848" end="990" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="traverse" start="884" end="896" line="27" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XML/fromNode" statement-count="7" statements-invoked="7" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromNode" start="279" end="382" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromNode" start="351" end="360" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromNode" start="186" end="198" line="11" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromNode" start="253" end="273" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromNode" start="317" end="362" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromNode" start="254" end="261" line="12" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="fromNode" start="303" end="307" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                        <method 
+                        name="pj.xml/XML/$anonfun" statement-count="7" statements-invoked="7" statement-rate="100.00" branch-rate="100.00">
+                            <statements>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="$anonfun" start="953" end="983" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="$anonfun" start="913" end="983" line="27" branch="true" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="$anonfun" start="976" end="983" line="31" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="$anonfun" start="923" end="983" line="28" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="$anonfun" start="958" end="962" line="30" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="$anonfun" start="372" end="377" line="13" branch="false" invocation-count="1" ignored="false">
+</statement>
+                                <statement 
+                                package="pj.xml" class="XML" class-type="Object" full-class-name="pj.xml.XML" source="C:\Users\pedro\Desktop\projeto\src\main\scala\pj\xml\XML.scala" method="$anonfun" start="995" end="1003" line="32" branch="false" invocation-count="1" ignored="false">
+</statement>
+                            </statements>
+</method>
+                    </methods>
+</class>
+            </classes>
+        </package>
+    </packages>
+</scoverage>

@@ -1,0 +1,2306 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          pj\domain\parsers\TaskParser.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package pj.domain.parsers
+</span>2 <span style=''>
+</span>3 <span style=''>import pj.domain.*
+</span>4 <span style=''>import pj.domain.DomainError.*
+</span>5 <span style=''>import pj.xml.XML.*
+</span>6 <span style=''>
+</span>7 <span style=''>import scala.util.Try
+</span>8 <span style=''>import scala.xml.Node
+</span>9 <span style=''>
+</span>10 <span style=''>object TaskParser {
+</span>11 <span style=''>
+</span>12 <span style=''>  </span><span style='background: #AEF1AE'>def parseTasks</span><span style=''>(node: Node, validPhysicalResources: List[PhysicalIn], humanResourcesNode: Node): Result[List[Task]] =
+</span>13 <span style=''>    val validHumanResources = </span><span style='background: #AEF1AE'>HumanParser.parseHumanResources(humanResourcesNode, validPhysicalResources.map(_.`type`).toSet).getOrElse(List.empty)</span><span style=''>
+</span>14 <span style=''>
+</span>15 <span style=''>    val taskNodes = </span><span style='background: #AEF1AE'>node \ &quot;Task&quot;</span><span style=''>
+</span>16 <span style=''>    val parsedTasks = </span><span style='background: #AEF1AE'>traverse(taskNodes, node =&gt; parseTask(node, validPhysicalResources, validHumanResources))</span><span style=''>
+</span>17 <span style=''>
+</span>18 <span style=''>    </span><span style='background: #AEF1AE'>parsedTasks.flatMap { tasks =&gt;
+</span>19 <span style=''></span><span style='background: #AEF1AE'>      val taskWithMissingResources = tasks.find(task =&gt;
+</span>20 <span style=''></span><span style='background: #AEF1AE'>        task.physicalResources.exists(reqType =&gt;
+</span>21 <span style=''></span><span style='background: #AEF1AE'>          validPhysicalResources.count(_.`type` == reqType.`type`) &lt; task.physicalResources.count(_.`type` == reqType.`type`)
+</span>22 <span style=''></span><span style='background: #AEF1AE'>        )
+</span>23 <span style=''></span><span style='background: #AEF1AE'>      )
+</span>24 <span style=''></span><span style='background: #AEF1AE'>
+</span>25 <span style=''></span><span style='background: #AEF1AE'>      val taskWithMissingHumans = tasks.find(task =&gt;
+</span>26 <span style=''></span><span style='background: #AEF1AE'>        task.physicalResources.exists(reqType =&gt;
+</span>27 <span style=''></span><span style='background: #AEF1AE'>          validHumanResources.count(_.handles.exists(_.`type` == reqType.`type`)) &lt; task.physicalResources.count(_.`type` == reqType.`type`)
+</span>28 <span style=''></span><span style='background: #AEF1AE'>        )
+</span>29 <span style=''></span><span style='background: #AEF1AE'>      )
+</span>30 <span style=''></span><span style='background: #AEF1AE'>
+</span>31 <span style=''></span><span style='background: #AEF1AE'>      (taskWithMissingResources, taskWithMissingHumans) match
+</span>32 <span style=''></span><span style='background: #AEF1AE'>        case (Some(task), _) </span><span style='background: #F0ADAD'>=&gt; Left(ResourceUnavailable(task.id.id, task.physicalResources.map(_.`type`.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))</span><span style='background: #AEF1AE'>
+</span>33 <span style=''></span><span style='background: #AEF1AE'>        case (_, Some(task)) =&gt; Left(ResourceUnavailable(task.id.id, task.physicalResources.map(_.`type`.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))
+</span>34 <span style=''></span><span style='background: #AEF1AE'>        case _              =&gt; Right(tasks)
+</span>35 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>36 <span style=''>
+</span>37 <span style=''>  </span><span style='background: #AEF1AE'>private def parseTask</span><span style=''>(node: Node, validPhysicalResources: List[PhysicalIn], validHumanResources: List[HumanIn]): Result[Task] =
+</span>38 <span style=''>    </span><span style='background: #AEF1AE'>fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;
+</span>39 <span style=''></span><span style='background: #AEF1AE'>      if (!idStr.startsWith(&quot;TSK_&quot;))
+</span>40 <span style=''></span><span style='background: #AEF1AE'>        Left(InvalidTaskId(idStr))
+</span>41 <span style=''></span><span style='background: #AEF1AE'>      else
+</span>42 <span style=''></span><span style='background: #AEF1AE'>        fromAttribute(node, &quot;time&quot;).flatMap { timeStr =&gt;
+</span>43 <span style=''></span><span style='background: #AEF1AE'>          val time = Try(timeStr.toInt).toOption
+</span>44 <span style=''></span><span style='background: #AEF1AE'>          time match
+</span>45 <span style=''></span><span style='background: #AEF1AE'>            case Some(parsedTime) =&gt;
+</span>46 <span style=''></span><span style='background: #AEF1AE'>              val physicalResourceNodes = node \ &quot;PhysicalResource&quot;
+</span>47 <span style=''></span><span style='background: #AEF1AE'>              traverse(physicalResourceNodes, pr =&gt; validatePhysicalResourceType(pr, validPhysicalResources)).flatMap { physicalResources =&gt;
+</span>48 <span style=''></span><span style='background: #AEF1AE'>
+</span>49 <span style=''></span><span style='background: #AEF1AE'>                // Verifica disponibilidade de PhysicalResources
+</span>50 <span style=''></span><span style='background: #AEF1AE'>                val requiredTypes = physicalResources.map(_.`type`)
+</span>51 <span style=''></span><span style='background: #AEF1AE'>                val availablePhysicals = validPhysicalResources.filter(p =&gt; requiredTypes.contains(p.`type`))
+</span>52 <span style=''></span><span style='background: #AEF1AE'>
+</span>53 <span style=''></span><span style='background: #AEF1AE'>                if (availablePhysicals.sizeIs &lt; physicalResources.size)
+</span>54 <span style=''></span><span style='background: #AEF1AE'>                  Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))
+</span>55 <span style=''></span><span style='background: #AEF1AE'>                else
+</span>56 <span style=''></span><span style='background: #AEF1AE'>
+</span>57 <span style=''></span><span style='background: #AEF1AE'>                  // Valida disponibilidade de HumanResources
+</span>58 <span style=''></span><span style='background: #AEF1AE'>                  val requiredHumans = requiredTypes.flatMap(t =&gt; validHumanResources.find(_.handles.exists(_.`type` == t)))
+</span>59 <span style=''></span><span style='background: #AEF1AE'>                  val availableHumans = requiredHumans.size
+</span>60 <span style=''></span><span style='background: #AEF1AE'>
+</span>61 <span style=''></span><span style='background: #AEF1AE'>                  if (availableHumans &lt; physicalResources.size)
+</span>62 <span style=''></span><span style='background: #AEF1AE'>                    </span><span style='background: #F0ADAD'>Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))</span><span style='background: #AEF1AE'>
+</span>63 <span style=''></span><span style='background: #AEF1AE'>                  else
+</span>64 <span style=''></span><span style='background: #AEF1AE'>                    println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)
+</span>65 <span style=''></span><span style='background: #AEF1AE'>                    Right(Task(TaskId(idStr), TaskTime(parsedTime), physicalResources))
+</span>66 <span style=''></span><span style='background: #AEF1AE'>              }
+</span>67 <span style=''></span><span style='background: #AEF1AE'>            case None =&gt;
+</span>68 <span style=''></span><span style='background: #AEF1AE'>              Left(IOFileProblem(s&quot;InvalidTimeValue($timeStr)&quot;))
+</span>69 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>70 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>71 <span style=''>
+</span>72 <span style=''>  </span><span style='background: #AEF1AE'>private def validatePhysicalResourceType</span><span style=''>(node: Node, validPhysicalResources: List[PhysicalIn]): Result[PhysicalResource] =
+</span>73 <span style=''>    </span><span style='background: #AEF1AE'>fromAttribute(node, &quot;type&quot;).flatMap { resourceType =&gt;
+</span>74 <span style=''></span><span style='background: #AEF1AE'>      val resource = PhysicalResource(PhysicalInType(resourceType))
+</span>75 <span style=''></span><span style='background: #AEF1AE'>      if (validPhysicalResources.exists(_.`type` == resource.`type`))
+</span>76 <span style=''></span><span style='background: #AEF1AE'>        Right(resource)
+</span>77 <span style=''></span><span style='background: #AEF1AE'>      else
+</span>78 <span style=''></span><span style='background: #AEF1AE'>        Left(TaskUsesNonExistentPRT(resourceType))
+</span>79 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>80 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          182
+        </td>
+        <td>
+          177
+          -
+          191
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseTasks
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          def parseTasks
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          149
+        </td>
+        <td>
+          325
+          -
+          442
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          getOrElse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          HumanParser.parseHumanResources(humanResourcesNode, validPhysicalResources.map(_.`type`).toSet).getOrElse(List.empty)
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          151
+        </td>
+        <td>
+          377
+          -
+          413
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validPhysicalResources.map(_.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          154
+        </td>
+        <td>
+          431
+          -
+          441
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          empty
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          List.empty
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          150
+        </td>
+        <td>
+          325
+          -
+          420
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseHumanResources
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          HumanParser.parseHumanResources(humanResourcesNode, validPhysicalResources.map(_.`type`).toSet)
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          153
+        </td>
+        <td>
+          431
+          -
+          435
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          List
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          List
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          152
+        </td>
+        <td>
+          377
+          -
+          419
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toSet
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validPhysicalResources.map(_.`type`).toSet
+        </td>
+      </tr><tr>
+        <td>
+          15
+        </td>
+        <td>
+          155
+        </td>
+        <td>
+          466
+          -
+          479
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          \\
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          node \\ &quot;Task&quot;
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          157
+        </td>
+        <td>
+          531
+          -
+          591
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseTask
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          parseTask(node, validPhysicalResources, validHumanResources)
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          156
+        </td>
+        <td>
+          503
+          -
+          592
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          traverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(taskNodes, node =&gt; parseTask(node, validPhysicalResources, validHumanResources))
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          158
+        </td>
+        <td>
+          600
+          -
+          1583
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          parsedTasks.flatMap { tasks =&gt;\r\n      val taskWithMissingResources = tasks.find(task =&gt;\r\n        task.physicalResources.exists(reqType =&gt;\r\n          validPhysicalResources.count(_.`type` == reqType.`type`) &lt; task.physicalResources.count(_.`type` == reqType.`type`)\r\n        )\r\n      )\r\n\r\n      val taskWithMissingHumans = tasks.find(task =&gt;\r\n        task.physicalResources.exists(reqType =&gt;\r\n          validHumanResources.count(_.handles.exists(_.`type` == reqType.`type`)) &lt; task.physicalResources.count(_.`type` == reqType.`type`)\r\n        )\r\n      )\r\n\r\n      (taskWithMissingResources, taskWithMissingHumans) match\r\n        case (Some(task), _) =&gt; Left(ResourceUnavailable(task.id.id, task.physicalResources.map(_.`type`.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n        case (_, Some(task)) =&gt; Left(ResourceUnavailable(task.id.id, task.physicalResources.map(_.`type`.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n        case _              =&gt; Right(tasks)\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          159
+        </td>
+        <td>
+          669
+          -
+          884
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          tasks.find(task =&gt;\r\n        task.physicalResources.exists(reqType =&gt;\r\n          validPhysicalResources.count(_.`type` == reqType.`type`) &lt; task.physicalResources.count(_.`type` == reqType.`type`)\r\n        )\r\n      )
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          160
+        </td>
+        <td>
+          697
+          -
+          875
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          exists
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.exists(reqType =&gt;\r\n          validPhysicalResources.count(_.`type` == reqType.`type`) &lt; task.physicalResources.count(_.`type` == reqType.`type`)\r\n        )
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          162
+        </td>
+        <td>
+          808
+          -
+          864
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          count
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.count(_.`type` == reqType.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          161
+        </td>
+        <td>
+          749
+          -
+          805
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          count
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validPhysicalResources.count(_.`type` == reqType.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          163
+        </td>
+        <td>
+          922
+          -
+          1152
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          tasks.find(task =&gt;\r\n        task.physicalResources.exists(reqType =&gt;\r\n          validHumanResources.count(_.handles.exists(_.`type` == reqType.`type`)) &lt; task.physicalResources.count(_.`type` == reqType.`type`)\r\n        )\r\n      )
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          164
+        </td>
+        <td>
+          950
+          -
+          1143
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          exists
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.exists(reqType =&gt;\r\n          validHumanResources.count(_.handles.exists(_.`type` == reqType.`type`)) &lt; task.physicalResources.count(_.`type` == reqType.`type`)\r\n        )
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          167
+        </td>
+        <td>
+          1076
+          -
+          1132
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          count
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.count(_.`type` == reqType.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          166
+        </td>
+        <td>
+          1028
+          -
+          1072
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          exists
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          _.handles.exists(_.`type` == reqType.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          165
+        </td>
+        <td>
+          1002
+          -
+          1073
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          count
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validHumanResources.count(_.handles.exists(_.`type` == reqType.`type`))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          173
+        </td>
+        <td>
+          1248
+          -
+          1374
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          =&gt; Left(ResourceUnavailable(task.id.id, task.physicalResources.map(_.`type`.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          169
+        </td>
+        <td>
+          1288
+          -
+          1372
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          getOrElse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          task.physicalResources.map(_.`type`.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          172
+        </td>
+        <td>
+          1288
+          -
+          1351
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          headOption
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          task.physicalResources.map(_.`type`.`type`).distinct.headOption
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          168
+        </td>
+        <td>
+          1251
+          -
+          1255
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          171
+        </td>
+        <td>
+          1288
+          -
+          1340
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          distinct
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          task.physicalResources.map(_.`type`.`type`).distinct
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          170
+        </td>
+        <td>
+          1288
+          -
+          1331
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          task.physicalResources.map(_.`type`.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          176
+        </td>
+        <td>
+          1445
+          -
+          1488
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.map(_.`type`.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          175
+        </td>
+        <td>
+          1445
+          -
+          1529
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          getOrElse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.map(_.`type`.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          178
+        </td>
+        <td>
+          1445
+          -
+          1508
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          headOption
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.map(_.`type`.`type`).distinct.headOption
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          174
+        </td>
+        <td>
+          1408
+          -
+          1412
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          177
+        </td>
+        <td>
+          1445
+          -
+          1497
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          distinct
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.map(_.`type`.`type`).distinct
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          179
+        </td>
+        <td>
+          1405
+          -
+          1531
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt; Left(ResourceUnavailable(task.id.id, task.physicalResources.map(_.`type`.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          181
+        </td>
+        <td>
+          1561
+          -
+          1576
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt; Right(tasks)
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          180
+        </td>
+        <td>
+          1564
+          -
+          1569
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Right
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right
+        </td>
+      </tr><tr>
+        <td>
+          37
+        </td>
+        <td>
+          231
+        </td>
+        <td>
+          1589
+          -
+          1610
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseTask
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          private def parseTask
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          184
+        </td>
+        <td>
+          1722
+          -
+          1747
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          38
+        </td>
+        <td>
+          183
+        </td>
+        <td>
+          1722
+          -
+          3460
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;\r\n      if (!idStr.startsWith(&quot;TSK_&quot;))\r\n        Left(InvalidTaskId(idStr))\r\n      else\r\n        fromAttribute(node, &quot;time&quot;).flatMap { timeStr =&gt;\r\n          val time = Try(timeStr.toInt).toOption\r\n          time match\r\n            case Some(parsedTime) =&gt;\r\n              val physicalResourceNodes = node \\ &quot;PhysicalResource&quot;\r\n              traverse(physicalResourceNodes, pr =&gt; validatePhysicalResourceType(pr, validPhysicalResources)).flatMap { physicalResources =&gt;\r\n\r\n                // Verifica disponibilidade de PhysicalResources\r\n                val requiredTypes = physicalResources.map(_.`type`)\r\n                val availablePhysicals = validPhysicalResources.filter(p =&gt; requiredTypes.contains(p.`type`))\r\n\r\n                if (availablePhysicals.sizeIs &lt; physicalResources.size)\r\n                  Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                else\r\n\r\n                  // Valida disponibilidade de HumanResources\r\n                  val requiredHumans = requiredTypes.flatMap(t =&gt; validHumanResources.find(_.handles.exists(_.`type` == t)))\r\n                  val availableHumans = requiredHumans.size\r\n\r\n                  if (availableHumans &lt; physicalResources.size)\r\n                    Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                  else\r\n                    println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)\r\n                    Right(Task(TaskId(idStr), TaskTime(parsedTime), physicalResources))\r\n              }\r\n            case None =&gt;\r\n              Left(IOFileProblem(s&quot;InvalidTimeValue($timeStr)&quot;))\r\n        }\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          39
+        </td>
+        <td>
+          185
+        </td>
+        <td>
+          1779
+          -
+          1803
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          startsWith
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          idStr.startsWith(&quot;TSK_&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          187
+        </td>
+        <td>
+          1814
+          -
+          1840
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(InvalidTaskId(idStr))
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          186
+        </td>
+        <td>
+          1814
+          -
+          1818
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          189
+        </td>
+        <td>
+          1862
+          -
+          1889
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;time&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          230
+        </td>
+        <td>
+          1862
+          -
+          3453
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;time&quot;).flatMap { timeStr =&gt;\r\n          val time = Try(timeStr.toInt).toOption\r\n          time match\r\n            case Some(parsedTime) =&gt;\r\n              val physicalResourceNodes = node \\ &quot;PhysicalResource&quot;\r\n              traverse(physicalResourceNodes, pr =&gt; validatePhysicalResourceType(pr, validPhysicalResources)).flatMap { physicalResources =&gt;\r\n\r\n                // Verifica disponibilidade de PhysicalResources\r\n                val requiredTypes = physicalResources.map(_.`type`)\r\n                val availablePhysicals = validPhysicalResources.filter(p =&gt; requiredTypes.contains(p.`type`))\r\n\r\n                if (availablePhysicals.sizeIs &lt; physicalResources.size)\r\n                  Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                else\r\n\r\n                  // Valida disponibilidade de HumanResources\r\n                  val requiredHumans = requiredTypes.flatMap(t =&gt; validHumanResources.find(_.handles.exists(_.`type` == t)))\r\n                  val availableHumans = requiredHumans.size\r\n\r\n                  if (availableHumans &lt; physicalResources.size)\r\n                    Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                  else\r\n                    println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)\r\n                    Right(Task(TaskId(idStr), TaskTime(parsedTime), physicalResources))\r\n              }\r\n            case None =&gt;\r\n              Left(IOFileProblem(s&quot;InvalidTimeValue($timeStr)&quot;))\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          42
+        </td>
+        <td>
+          188
+        </td>
+        <td>
+          1862
+          -
+          3453
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;time&quot;).flatMap { timeStr =&gt;\r\n          val time = Try(timeStr.toInt).toOption\r\n          time match\r\n            case Some(parsedTime) =&gt;\r\n              val physicalResourceNodes = node \\ &quot;PhysicalResource&quot;\r\n              traverse(physicalResourceNodes, pr =&gt; validatePhysicalResourceType(pr, validPhysicalResources)).flatMap { physicalResources =&gt;\r\n\r\n                // Verifica disponibilidade de PhysicalResources\r\n                val requiredTypes = physicalResources.map(_.`type`)\r\n                val availablePhysicals = validPhysicalResources.filter(p =&gt; requiredTypes.contains(p.`type`))\r\n\r\n                if (availablePhysicals.sizeIs &lt; physicalResources.size)\r\n                  Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                else\r\n\r\n                  // Valida disponibilidade de HumanResources\r\n                  val requiredHumans = requiredTypes.flatMap(t =&gt; validHumanResources.find(_.handles.exists(_.`type` == t)))\r\n                  val availableHumans = requiredHumans.size\r\n\r\n                  if (availableHumans &lt; physicalResources.size)\r\n                    Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                  else\r\n                    println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)\r\n                    Right(Task(TaskId(idStr), TaskTime(parsedTime), physicalResources))\r\n              }\r\n            case None =&gt;\r\n              Left(IOFileProblem(s&quot;InvalidTimeValue($timeStr)&quot;))\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          191
+        </td>
+        <td>
+          1937
+          -
+          1944
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          augmentString
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          timeStr
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          193
+        </td>
+        <td>
+          1933
+          -
+          1960
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toOption
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Try(timeStr.toInt).toOption
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          190
+        </td>
+        <td>
+          1933
+          -
+          1951
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Try(timeStr.toInt)
+        </td>
+      </tr><tr>
+        <td>
+          43
+        </td>
+        <td>
+          192
+        </td>
+        <td>
+          1937
+          -
+          1950
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toInt
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          timeStr.toInt
+        </td>
+      </tr><tr>
+        <td>
+          46
+        </td>
+        <td>
+          194
+        </td>
+        <td>
+          2064
+          -
+          2089
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          \\
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          node \\ &quot;PhysicalResource&quot;
+        </td>
+      </tr><tr>
+        <td>
+          46
+        </td>
+        <td>
+          226
+        </td>
+        <td>
+          2036
+          -
+          3350
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          val physicalResourceNodes = node \\ &quot;PhysicalResource&quot;\r\n              traverse(physicalResourceNodes, pr =&gt; validatePhysicalResourceType(pr, validPhysicalResources)).flatMap { physicalResources =&gt;\r\n\r\n                // Verifica disponibilidade de PhysicalResources\r\n                val requiredTypes = physicalResources.map(_.`type`)\r\n                val availablePhysicals = validPhysicalResources.filter(p =&gt; requiredTypes.contains(p.`type`))\r\n\r\n                if (availablePhysicals.sizeIs &lt; physicalResources.size)\r\n                  Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                else\r\n\r\n                  // Valida disponibilidade de HumanResources\r\n                  val requiredHumans = requiredTypes.flatMap(t =&gt; validHumanResources.find(_.handles.exists(_.`type` == t)))\r\n                  val availableHumans = requiredHumans.size\r\n\r\n                  if (availableHumans &lt; physicalResources.size)\r\n                    Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                  else\r\n                    println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)\r\n                    Right(Task(TaskId(idStr), TaskTime(parsedTime), physicalResources))\r\n              }
+        </td>
+      </tr><tr>
+        <td>
+          47
+        </td>
+        <td>
+          196
+        </td>
+        <td>
+          2105
+          -
+          2200
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          traverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(physicalResourceNodes, pr =&gt; validatePhysicalResourceType(pr, validPhysicalResources))
+        </td>
+      </tr><tr>
+        <td>
+          47
+        </td>
+        <td>
+          195
+        </td>
+        <td>
+          2105
+          -
+          3350
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(physicalResourceNodes, pr =&gt; validatePhysicalResourceType(pr, validPhysicalResources)).flatMap { physicalResources =&gt;\r\n\r\n                // Verifica disponibilidade de PhysicalResources\r\n                val requiredTypes = physicalResources.map(_.`type`)\r\n                val availablePhysicals = validPhysicalResources.filter(p =&gt; requiredTypes.contains(p.`type`))\r\n\r\n                if (availablePhysicals.sizeIs &lt; physicalResources.size)\r\n                  Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                else\r\n\r\n                  // Valida disponibilidade de HumanResources\r\n                  val requiredHumans = requiredTypes.flatMap(t =&gt; validHumanResources.find(_.handles.exists(_.`type` == t)))\r\n                  val availableHumans = requiredHumans.size\r\n\r\n                  if (availableHumans &lt; physicalResources.size)\r\n                    Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                  else\r\n                    println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)\r\n                    Right(Task(TaskId(idStr), TaskTime(parsedTime), physicalResources))\r\n              }
+        </td>
+      </tr><tr>
+        <td>
+          47
+        </td>
+        <td>
+          197
+        </td>
+        <td>
+          2143
+          -
+          2199
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          validatePhysicalResourceType
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validatePhysicalResourceType(pr, validPhysicalResources)
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          198
+        </td>
+        <td>
+          2337
+          -
+          2368
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources.map(_.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          200
+        </td>
+        <td>
+          2446
+          -
+          2478
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          contains
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredTypes.contains(p.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          199
+        </td>
+        <td>
+          2411
+          -
+          2479
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          filter
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validPhysicalResources.filter(p =&gt; requiredTypes.contains(p.`type`))
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          202
+        </td>
+        <td>
+          2503
+          -
+          2528
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          sizeIs
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          availablePhysicals.sizeIs
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          201
+        </td>
+        <td>
+          2503
+          -
+          2553
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          &lt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          availablePhysicals.sizeIs &lt; physicalResources.size
+        </td>
+      </tr><tr>
+        <td>
+          53
+        </td>
+        <td>
+          203
+        </td>
+        <td>
+          2531
+          -
+          2553
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          size
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources.size
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          209
+        </td>
+        <td>
+          2574
+          -
+          2676
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          205
+        </td>
+        <td>
+          2606
+          -
+          2674
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          getOrElse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          208
+        </td>
+        <td>
+          2606
+          -
+          2653
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          headOption
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredTypes.map(_.`type`).distinct.headOption
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          207
+        </td>
+        <td>
+          2606
+          -
+          2642
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          distinct
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredTypes.map(_.`type`).distinct
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          204
+        </td>
+        <td>
+          2574
+          -
+          2578
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          54
+        </td>
+        <td>
+          206
+        </td>
+        <td>
+          2606
+          -
+          2633
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredTypes.map(_.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          58
+        </td>
+        <td>
+          211
+        </td>
+        <td>
+          2831
+          -
+          2888
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validHumanResources.find(_.handles.exists(_.`type` == t))
+        </td>
+      </tr><tr>
+        <td>
+          58
+        </td>
+        <td>
+          225
+        </td>
+        <td>
+          2783
+          -
+          3333
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          val requiredHumans = requiredTypes.flatMap(t =&gt; validHumanResources.find(_.handles.exists(_.`type` == t)))\r\n                  val availableHumans = requiredHumans.size\r\n\r\n                  if (availableHumans &lt; physicalResources.size)\r\n                    Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))\r\n                  else\r\n                    println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)\r\n                    Right(Task(TaskId(idStr), TaskTime(parsedTime), physicalResources))
+        </td>
+      </tr><tr>
+        <td>
+          58
+        </td>
+        <td>
+          210
+        </td>
+        <td>
+          2804
+          -
+          2889
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredTypes.flatMap(t =&gt; validHumanResources.find(_.handles.exists(_.`type` == t)))
+        </td>
+      </tr><tr>
+        <td>
+          58
+        </td>
+        <td>
+          212
+        </td>
+        <td>
+          2856
+          -
+          2887
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          exists
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          _.handles.exists(_.`type` == t)
+        </td>
+      </tr><tr>
+        <td>
+          59
+        </td>
+        <td>
+          213
+        </td>
+        <td>
+          2931
+          -
+          2950
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          size
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredHumans.size
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          214
+        </td>
+        <td>
+          2994
+          -
+          3016
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          size
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources.size
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          218
+        </td>
+        <td>
+          3071
+          -
+          3107
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          distinct
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          requiredTypes.map(_.`type`).distinct
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          220
+        </td>
+        <td>
+          3039
+          -
+          3141
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          Left(ResourceUnavailable(idStr, requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)))
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          217
+        </td>
+        <td>
+          3071
+          -
+          3098
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          requiredTypes.map(_.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          216
+        </td>
+        <td>
+          3071
+          -
+          3139
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          getOrElse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          requiredTypes.map(_.`type`).distinct.headOption.getOrElse(&quot;Unknown&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          219
+        </td>
+        <td>
+          3071
+          -
+          3118
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          headOption
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          requiredTypes.map(_.`type`).distinct.headOption
+        </td>
+      </tr><tr>
+        <td>
+          62
+        </td>
+        <td>
+          215
+        </td>
+        <td>
+          3039
+          -
+          3043
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          222
+        </td>
+        <td>
+          3195
+          -
+          3243
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          s
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          221
+        </td>
+        <td>
+          3187
+          -
+          3244
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          println
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          224
+        </td>
+        <td>
+          3187
+          -
+          3333
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          println(s&quot;Task: $idStr, $parsedTime, $physicalResources&quot;)\r\n                    Right(Task(TaskId(idStr), TaskTime(parsedTime), physicalResources))
+        </td>
+      </tr><tr>
+        <td>
+          65
+        </td>
+        <td>
+          223
+        </td>
+        <td>
+          3266
+          -
+          3271
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Right
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right
+        </td>
+      </tr><tr>
+        <td>
+          67
+        </td>
+        <td>
+          229
+        </td>
+        <td>
+          3374
+          -
+          3442
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt;\r\n              Left(IOFileProblem(s&quot;InvalidTimeValue($timeStr)&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          68
+        </td>
+        <td>
+          227
+        </td>
+        <td>
+          3392
+          -
+          3396
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          68
+        </td>
+        <td>
+          228
+        </td>
+        <td>
+          3411
+          -
+          3440
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          s
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          s&quot;InvalidTimeValue($timeStr)&quot;
+        </td>
+      </tr><tr>
+        <td>
+          72
+        </td>
+        <td>
+          239
+        </td>
+        <td>
+          3466
+          -
+          3506
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          validatePhysicalResourceType
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          private def validatePhysicalResourceType
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          232
+        </td>
+        <td>
+          3594
+          -
+          3883
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;type&quot;).flatMap { resourceType =&gt;\r\n      val resource = PhysicalResource(PhysicalInType(resourceType))\r\n      if (validPhysicalResources.exists(_.`type` == resource.`type`))\r\n        Right(resource)\r\n      else\r\n        Left(TaskUsesNonExistentPRT(resourceType))\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          233
+        </td>
+        <td>
+          3594
+          -
+          3621
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;type&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          234
+        </td>
+        <td>
+          3728
+          -
+          3786
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          exists
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validPhysicalResources.exists(_.`type` == resource.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          76
+        </td>
+        <td>
+          236
+        </td>
+        <td>
+          3797
+          -
+          3812
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right(resource)
+        </td>
+      </tr><tr>
+        <td>
+          76
+        </td>
+        <td>
+          235
+        </td>
+        <td>
+          3797
+          -
+          3802
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Right
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          238
+        </td>
+        <td>
+          3834
+          -
+          3876
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(TaskUsesNonExistentPRT(resourceType))
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          237
+        </td>
+        <td>
+          3834
+          -
+          3838
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

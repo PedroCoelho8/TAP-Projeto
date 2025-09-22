@@ -1,0 +1,822 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          pj\domain\parsers\HumanParser.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package pj.domain.parsers
+</span>2 <span style=''>
+</span>3 <span style=''>import pj.domain.*
+</span>4 <span style=''>import ProductionParser.*
+</span>5 <span style=''>import pj.domain.DomainError.*
+</span>6 <span style=''>import pj.xml.XML.*
+</span>7 <span style=''>
+</span>8 <span style=''>import scala.xml.Node
+</span>9 <span style=''>
+</span>10 <span style=''>object HumanParser:
+</span>11 <span style=''>
+</span>12 <span style=''>  </span><span style='background: #AEF1AE'>def parseHumanResources</span><span style=''>(node: Node, validTypes: Set[PhysicalInType]): Result[List[HumanIn]] =
+</span>13 <span style=''>    val humanNodes = </span><span style='background: #AEF1AE'>node \ &quot;Human&quot;</span><span style=''>
+</span>14 <span style=''>    </span><span style='background: #AEF1AE'>traverse(humanNodes, parseHumanResource(_, validTypes))</span><span style=''>
+</span>15 <span style=''>
+</span>16 <span style=''>  </span><span style='background: #AEF1AE'>private def parseHumanResource</span><span style=''>(node: Node, validTypes: Set[PhysicalInType]): Result[HumanIn] =
+</span>17 <span style=''>    </span><span style='background: #AEF1AE'>fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;
+</span>18 <span style=''></span><span style='background: #AEF1AE'>      if (!idStr.startsWith(&quot;HRS_&quot;))
+</span>19 <span style=''></span><span style='background: #AEF1AE'>        Left(InvalidHumanId(idStr))
+</span>20 <span style=''></span><span style='background: #AEF1AE'>      else
+</span>21 <span style=''></span><span style='background: #AEF1AE'>        fromAttribute(node, &quot;name&quot;).flatMap { name =&gt;
+</span>22 <span style=''></span><span style='background: #AEF1AE'>          val handlesNodes = node \ &quot;Handles&quot;
+</span>23 <span style=''></span><span style='background: #AEF1AE'>          traverse(handlesNodes, parseHandles(_, validTypes)).map { handles =&gt;
+</span>24 <span style=''></span><span style='background: #AEF1AE'>
+</span>25 <span style=''></span><span style='background: #AEF1AE'>            println(&quot;Human: &quot;+ idStr + &quot;, &quot; + name + &quot;, &quot; + handles)
+</span>26 <span style=''></span><span style='background: #AEF1AE'>            HumanIn(HumanId(idStr), HumanName(name), handles)
+</span>27 <span style=''></span><span style='background: #AEF1AE'>          }
+</span>28 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>29 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>30 <span style=''>
+</span>31 <span style=''>  </span><span style='background: #AEF1AE'>private def parseHandles</span><span style=''>(node: Node, validTypes: Set[PhysicalInType]): Result[Handles] =
+</span>32 <span style=''>    </span><span style='background: #AEF1AE'>fromAttribute(node, &quot;type&quot;).flatMap { typ =&gt;
+</span>33 <span style=''></span><span style='background: #AEF1AE'>      val pt = PhysicalInType(typ)
+</span>34 <span style=''></span><span style='background: #AEF1AE'>      if (validTypes.contains(pt)) Right(Handles(pt))
+</span>35 <span style=''></span><span style='background: #AEF1AE'>      else Left(InvalidHandleType(typ))
+</span>36 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          7
+        </td>
+        <td>
+          181
+          -
+          204
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseHumanResources
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          def parseHumanResources
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          4
+        </td>
+        <td>
+          297
+          -
+          311
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          \\
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          node \\ &quot;Human&quot;
+        </td>
+      </tr><tr>
+        <td>
+          14
+        </td>
+        <td>
+          5
+        </td>
+        <td>
+          317
+          -
+          372
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          traverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(humanNodes, parseHumanResource(_, validTypes))
+        </td>
+      </tr><tr>
+        <td>
+          14
+        </td>
+        <td>
+          6
+        </td>
+        <td>
+          338
+          -
+          371
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseHumanResource
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          parseHumanResource(_, validTypes)
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          26
+        </td>
+        <td>
+          378
+          -
+          408
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseHumanResource
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          private def parseHumanResource
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          8
+        </td>
+        <td>
+          478
+          -
+          957
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;\r\n      if (!idStr.startsWith(&quot;HRS_&quot;))\r\n        Left(InvalidHumanId(idStr))\r\n      else\r\n        fromAttribute(node, &quot;name&quot;).flatMap { name =&gt;\r\n          val handlesNodes = node \\ &quot;Handles&quot;\r\n          traverse(handlesNodes, parseHandles(_, validTypes)).map { handles =&gt;\r\n\r\n            println(&quot;Human: &quot;+ idStr + &quot;, &quot; + name + &quot;, &quot; + handles)\r\n            HumanIn(HumanId(idStr), HumanName(name), handles)\r\n          }\r\n        }\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          9
+        </td>
+        <td>
+          478
+          -
+          503
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          10
+        </td>
+        <td>
+          535
+          -
+          559
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          startsWith
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          idStr.startsWith(&quot;HRS_&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          11
+        </td>
+        <td>
+          570
+          -
+          574
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          12
+        </td>
+        <td>
+          570
+          -
+          597
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(InvalidHumanId(idStr))
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          14
+        </td>
+        <td>
+          619
+          -
+          646
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;name&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          13
+        </td>
+        <td>
+          619
+          -
+          950
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;name&quot;).flatMap { name =&gt;\r\n          val handlesNodes = node \\ &quot;Handles&quot;\r\n          traverse(handlesNodes, parseHandles(_, validTypes)).map { handles =&gt;\r\n\r\n            println(&quot;Human: &quot;+ idStr + &quot;, &quot; + name + &quot;, &quot; + handles)\r\n            HumanIn(HumanId(idStr), HumanName(name), handles)\r\n          }\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          25
+        </td>
+        <td>
+          619
+          -
+          950
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;name&quot;).flatMap { name =&gt;\r\n          val handlesNodes = node \\ &quot;Handles&quot;\r\n          traverse(handlesNodes, parseHandles(_, validTypes)).map { handles =&gt;\r\n\r\n            println(&quot;Human: &quot;+ idStr + &quot;, &quot; + name + &quot;, &quot; + handles)\r\n            HumanIn(HumanId(idStr), HumanName(name), handles)\r\n          }\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          15
+        </td>
+        <td>
+          695
+          -
+          711
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          \\
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          node \\ &quot;Handles&quot;
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          17
+        </td>
+        <td>
+          723
+          -
+          774
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          traverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(handlesNodes, parseHandles(_, validTypes))
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          16
+        </td>
+        <td>
+          723
+          -
+          939
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(handlesNodes, parseHandles(_, validTypes)).map { handles =&gt;\r\n\r\n            println(&quot;Human: &quot;+ idStr + &quot;, &quot; + name + &quot;, &quot; + handles)\r\n            HumanIn(HumanId(idStr), HumanName(name), handles)\r\n          }
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          18
+        </td>
+        <td>
+          746
+          -
+          773
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseHandles
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          parseHandles(_, validTypes)
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          23
+        </td>
+        <td>
+          815
+          -
+          838
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Human: &quot;+ idStr + &quot;, &quot;
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          20
+        </td>
+        <td>
+          815
+          -
+          862
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Human: &quot;+ idStr + &quot;, &quot; + name + &quot;, &quot; + handles
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          22
+        </td>
+        <td>
+          815
+          -
+          845
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Human: &quot;+ idStr + &quot;, &quot; + name
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          19
+        </td>
+        <td>
+          807
+          -
+          863
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          println
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          println(&quot;Human: &quot;+ idStr + &quot;, &quot; + name + &quot;, &quot; + handles)
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          21
+        </td>
+        <td>
+          815
+          -
+          852
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Human: &quot;+ idStr + &quot;, &quot; + name + &quot;, &quot;
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          24
+        </td>
+        <td>
+          815
+          -
+          831
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Human: &quot;+ idStr
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          34
+        </td>
+        <td>
+          963
+          -
+          987
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseHandles
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          private def parseHandles
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          28
+        </td>
+        <td>
+          1057
+          -
+          1084
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;type&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          27
+        </td>
+        <td>
+          1057
+          -
+          1240
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;type&quot;).flatMap { typ =&gt;\r\n      val pt = PhysicalInType(typ)\r\n      if (validTypes.contains(pt)) Right(Handles(pt))\r\n      else Left(InvalidHandleType(typ))\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          29
+        </td>
+        <td>
+          1149
+          -
+          1172
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          contains
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validTypes.contains(pt)
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          31
+        </td>
+        <td>
+          1174
+          -
+          1192
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right(Handles(pt))
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          30
+        </td>
+        <td>
+          1174
+          -
+          1179
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Right
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          32
+        </td>
+        <td>
+          1205
+          -
+          1209
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          33
+        </td>
+        <td>
+          1205
+          -
+          1233
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(InvalidHandleType(typ))
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

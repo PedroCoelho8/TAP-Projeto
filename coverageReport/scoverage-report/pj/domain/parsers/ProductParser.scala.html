@@ -1,0 +1,678 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          pj\domain\parsers\ProductParser.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package pj.domain.parsers
+</span>2 <span style=''>
+</span>3 <span style=''>import pj.domain.*
+</span>4 <span style=''>import pj.domain.DomainError.*
+</span>5 <span style=''>import pj.xml.XML.*
+</span>6 <span style=''>
+</span>7 <span style=''>import scala.xml.Node
+</span>8 <span style=''>
+</span>9 <span style=''>object ProductParser:
+</span>10 <span style=''>
+</span>11 <span style=''>  </span><span style='background: #AEF1AE'>def parseProducts</span><span style=''>(node: Node, validTasks: Map[String, Task]): Result[List[Product]] =
+</span>12 <span style=''>    val productNodes = </span><span style='background: #AEF1AE'>node \ &quot;Product&quot;</span><span style=''>
+</span>13 <span style=''>    </span><span style='background: #AEF1AE'>traverse(productNodes, parseProduct(validTasks))</span><span style=''>
+</span>14 <span style=''>
+</span>15 <span style=''>  </span><span style='background: #AEF1AE'>private def parseProduct</span><span style=''>(validTasks: Map[String, Task])(node: Node): Result[Product] =
+</span>16 <span style=''>    </span><span style='background: #AEF1AE'>fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;
+</span>17 <span style=''></span><span style='background: #AEF1AE'>      if (!idStr.startsWith(&quot;PRD_&quot;))
+</span>18 <span style=''></span><span style='background: #AEF1AE'>        Left(InvalidProductId(idStr))
+</span>19 <span style=''></span><span style='background: #AEF1AE'>      else
+</span>20 <span style=''></span><span style='background: #AEF1AE'>        fromAttribute(node, &quot;name&quot;).flatMap { name =&gt;
+</span>21 <span style=''></span><span style='background: #AEF1AE'>          val processNodes = node \ &quot;Process&quot;
+</span>22 <span style=''></span><span style='background: #AEF1AE'>          traverse(processNodes, parseProcess(validTasks)).map { processes =&gt;
+</span>23 <span style=''></span><span style='background: #AEF1AE'>            Product(ProductId(idStr), ProductName(name), processes)
+</span>24 <span style=''></span><span style='background: #AEF1AE'>          }
+</span>25 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>26 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>27 <span style=''>
+</span>28 <span style=''>  </span><span style='background: #AEF1AE'>private def parseProcess</span><span style=''>(validTasks: Map[String, Task])(node: Node): Result[Process] =
+</span>29 <span style=''>    </span><span style='background: #AEF1AE'>fromAttribute(node, &quot;tskref&quot;).flatMap { tskref =&gt;
+</span>30 <span style=''></span><span style='background: #AEF1AE'>      validTasks.get(tskref) match
+</span>31 <span style=''></span><span style='background: #AEF1AE'>        case Some(task) =&gt;
+</span>32 <span style=''></span><span style='background: #AEF1AE'>          Right(Process(TaskReference(tskref)))
+</span>33 <span style=''></span><span style='background: #AEF1AE'>        case _ =&gt; Left(TaskDoesNotExist(tskref))
+</span>34 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>35 <span style=''>
+</span>36 <span style=''>
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          91
+        </td>
+        <td>
+          156
+          -
+          173
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseProducts
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          def parseProducts
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          88
+        </td>
+        <td>
+          266
+          -
+          282
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          \\
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          node \\ &quot;Product&quot;
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          89
+        </td>
+        <td>
+          288
+          -
+          336
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          traverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(productNodes, parseProduct(validTasks))
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          90
+        </td>
+        <td>
+          311
+          -
+          335
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseProduct
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          parseProduct(validTasks)
+        </td>
+      </tr><tr>
+        <td>
+          15
+        </td>
+        <td>
+          104
+        </td>
+        <td>
+          342
+          -
+          366
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseProduct
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          private def parseProduct
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          92
+        </td>
+        <td>
+          434
+          -
+          848
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;\r\n      if (!idStr.startsWith(&quot;PRD_&quot;))\r\n        Left(InvalidProductId(idStr))\r\n      else\r\n        fromAttribute(node, &quot;name&quot;).flatMap { name =&gt;\r\n          val processNodes = node \\ &quot;Process&quot;\r\n          traverse(processNodes, parseProcess(validTasks)).map { processes =&gt;\r\n            Product(ProductId(idStr), ProductName(name), processes)\r\n          }\r\n        }\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          93
+        </td>
+        <td>
+          434
+          -
+          459
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          94
+        </td>
+        <td>
+          491
+          -
+          515
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          startsWith
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          idStr.startsWith(&quot;PRD_&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          95
+        </td>
+        <td>
+          526
+          -
+          530
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          96
+        </td>
+        <td>
+          526
+          -
+          555
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(InvalidProductId(idStr))
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          98
+        </td>
+        <td>
+          577
+          -
+          604
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;name&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          103
+        </td>
+        <td>
+          577
+          -
+          841
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;name&quot;).flatMap { name =&gt;\r\n          val processNodes = node \\ &quot;Process&quot;\r\n          traverse(processNodes, parseProcess(validTasks)).map { processes =&gt;\r\n            Product(ProductId(idStr), ProductName(name), processes)\r\n          }\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          97
+        </td>
+        <td>
+          577
+          -
+          841
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;name&quot;).flatMap { name =&gt;\r\n          val processNodes = node \\ &quot;Process&quot;\r\n          traverse(processNodes, parseProcess(validTasks)).map { processes =&gt;\r\n            Product(ProductId(idStr), ProductName(name), processes)\r\n          }\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          99
+        </td>
+        <td>
+          653
+          -
+          669
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          \\
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          node \\ &quot;Process&quot;
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          101
+        </td>
+        <td>
+          681
+          -
+          729
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          traverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(processNodes, parseProcess(validTasks))
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          100
+        </td>
+        <td>
+          681
+          -
+          830
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(processNodes, parseProcess(validTasks)).map { processes =&gt;\r\n            Product(ProductId(idStr), ProductName(name), processes)\r\n          }
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          102
+        </td>
+        <td>
+          704
+          -
+          728
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseProcess
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          parseProcess(validTasks)
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          112
+        </td>
+        <td>
+          854
+          -
+          878
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseProcess
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          private def parseProcess
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          106
+        </td>
+        <td>
+          946
+          -
+          975
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;tskref&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          105
+        </td>
+        <td>
+          946
+          -
+          1165
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;tskref&quot;).flatMap { tskref =&gt;\r\n      validTasks.get(tskref) match\r\n        case Some(task) =&gt;\r\n          Right(Process(TaskReference(tskref)))\r\n        case _ =&gt; Left(TaskDoesNotExist(tskref))\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          107
+        </td>
+        <td>
+          1003
+          -
+          1025
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          get
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          validTasks.get(tskref)
+        </td>
+      </tr><tr>
+        <td>
+          31
+        </td>
+        <td>
+          109
+        </td>
+        <td>
+          1057
+          -
+          1108
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt;\r\n          Right(Process(TaskReference(tskref)))
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          108
+        </td>
+        <td>
+          1071
+          -
+          1076
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Right
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          110
+        </td>
+        <td>
+          1128
+          -
+          1132
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          111
+        </td>
+        <td>
+          1125
+          -
+          1158
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt; Left(TaskDoesNotExist(tskref))
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

@@ -1,0 +1,74 @@
+@startuml
+class Order {
+    - id: int;
+    - idProduct: int;
+    - quantity: int;
+}
+
+class Product {
+    - id: int;
+    - fullName: string;
+    - idTaskLists: List<Integer>
+}
+
+class Task {
+    - id: int;
+    - timeTaken : int;
+    - idPhysResoList: List<Integer>
+}
+
+class PhysicalResource {
+    - id: int;
+    - type: PhysicalResourceType;
+    - quantityAvailable: int;
+     - available: boolean;
+}
+
+enum PhysicalResourceType{
+    - Cutting
+    - Painting Post
+    ...
+}
+
+class HumanResource {
+    - id: int;
+    - idPhysResoList: List<Integer>;
+    - available: boolean;
+}
+
+class TaskSchedule {
+    - id: int;
+    - idTask: int;
+    - idOrder: int;
+    - dtStarted: Time;
+}
+
+class ProductionSchedule{
+    - id: int;
+}
+
+note right of Task
+    Time is represented in time units
+end note
+
+note right of PhysicalResourceType
+    There are many types not defined on 
+    the given project's description
+end note
+
+ProductionSchedule "1" --> "N" TaskSchedule: reads from all
+
+TaskSchedule "1" --> "1" Order: directs to
+
+Order "1" --> "N" Product: contains
+
+Product "1" --> "N" Task: needs to perform
+
+HumanResource "1" --> "N" PhysicalResource: specializes in
+HumanResource "1" --> "1" Task: performs
+
+Task "1" --> "N" PhysicalResource: needs
+
+PhysicalResource -- PhysicalResourceType
+
+@enduml

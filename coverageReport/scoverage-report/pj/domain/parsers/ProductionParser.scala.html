@@ -1,0 +1,947 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          pj\domain\parsers\ProductionParser.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package pj.domain.parsers
+</span>2 <span style=''>
+</span>3 <span style=''>import pj.domain.*
+</span>4 <span style=''>import pj.io.FileIO
+</span>5 <span style=''>import pj.xml.XML.*
+</span>6 <span style=''>
+</span>7 <span style=''>import scala.xml.Elem
+</span>8 <span style=''>
+</span>9 <span style=''>object ProductionParser:
+</span>10 <span style=''>
+</span>11 <span style=''>  // Parse the entire XML to a Production
+</span>12 <span style=''>  // To be used whenever receiving the input
+</span>13 <span style=''>
+</span>14 <span style=''>  </span><span style='background: #AEF1AE'>def parseProduction</span><span style=''>(xml: Elem): Result[Production] =
+</span>15 <span style=''>    </span><span style='background: #AEF1AE'>for {
+</span>16 <span style=''></span><span style='background: #AEF1AE'>      physicalResourcesNode &lt;- fromNode(xml, &quot;PhysicalResources&quot;)
+</span>17 <span style=''></span><span style='background: #AEF1AE'>      physicalResources &lt;- PhysicalParser.parsePhysicalResources(physicalResourcesNode)
+</span>18 <span style=''></span><span style='background: #AEF1AE'>      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet
+</span>19 <span style=''></span><span style='background: #AEF1AE'>      tasksNode &lt;- fromNode(xml, &quot;Tasks&quot;)
+</span>20 <span style=''></span><span style='background: #AEF1AE'>      humanResourcesNode &lt;- fromNode(xml, &quot;HumanResources&quot;)
+</span>21 <span style=''></span><span style='background: #AEF1AE'>      humanResources &lt;- HumanParser.parseHumanResources(humanResourcesNode, physicalTypes)
+</span>22 <span style=''></span><span style='background: #AEF1AE'>      tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)
+</span>23 <span style=''></span><span style='background: #AEF1AE'>
+</span>24 <span style=''></span><span style='background: #AEF1AE'>      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap
+</span>25 <span style=''></span><span style='background: #AEF1AE'>      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet
+</span>26 <span style=''></span><span style='background: #AEF1AE'>
+</span>27 <span style=''></span><span style='background: #AEF1AE'>
+</span>28 <span style=''></span><span style='background: #AEF1AE'>      productsNode &lt;- fromNode(xml, &quot;Products&quot;)
+</span>29 <span style=''></span><span style='background: #AEF1AE'>      products &lt;- ProductParser.parseProducts(productsNode, validTasks)
+</span>30 <span style=''></span><span style='background: #AEF1AE'>      validProductIds = products.map(_.id).toSet
+</span>31 <span style=''></span><span style='background: #AEF1AE'>
+</span>32 <span style=''></span><span style='background: #AEF1AE'>      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)
+</span>33 <span style=''></span><span style='background: #AEF1AE'>      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)
+</span>34 <span style=''></span><span style='background: #AEF1AE'>
+</span>35 <span style=''></span><span style='background: #AEF1AE'>    } yield Production(
+</span>36 <span style=''></span><span style='background: #AEF1AE'>      physicalResources = physicalResources,
+</span>37 <span style=''></span><span style='background: #AEF1AE'>      taskResources = tasks,
+</span>38 <span style=''></span><span style='background: #AEF1AE'>      humanResources = humanResources,
+</span>39 <span style=''></span><span style='background: #AEF1AE'>      products = products,
+</span>40 <span style=''></span><span style='background: #AEF1AE'>      orders = orders
+</span>41 <span style=''></span><span style='background: #AEF1AE'>    )</span><span style=''>
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          14
+        </td>
+        <td>
+          148
+        </td>
+        <td>
+          239
+          -
+          258
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parseProduction
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          def parseProduction
+        </td>
+      </tr><tr>
+        <td>
+          15
+        </td>
+        <td>
+          113
+        </td>
+        <td>
+          297
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          for {\r\n      physicalResourcesNode &lt;- fromNode(xml, &quot;PhysicalResources&quot;)\r\n      physicalResources &lt;- PhysicalParser.parsePhysicalResources(physicalResourcesNode)\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n      tasksNode &lt;- fromNode(xml, &quot;Tasks&quot;)\r\n      humanResourcesNode &lt;- fromNode(xml, &quot;HumanResources&quot;)\r\n      humanResources &lt;- HumanParser.parseHumanResources(humanResourcesNode, physicalTypes)\r\n      tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)\r\n\r\n      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n\r\n\r\n      productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          114
+        </td>
+        <td>
+          335
+          -
+          369
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromNode
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromNode(xml, &quot;PhysicalResources&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          116
+        </td>
+        <td>
+          377
+          -
+          540
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources &lt;- PhysicalParser.parsePhysicalResources(physicalResourcesNode)\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          115
+        </td>
+        <td>
+          377
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources &lt;- PhysicalParser.parsePhysicalResources(physicalResourcesNode)\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n      tasksNode &lt;- fromNode(xml, &quot;Tasks&quot;)\r\n      humanResourcesNode &lt;- fromNode(xml, &quot;HumanResources&quot;)\r\n      humanResources &lt;- HumanParser.parseHumanResources(humanResourcesNode, physicalTypes)\r\n      tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)\r\n\r\n      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n\r\n\r\n      productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          117
+        </td>
+        <td>
+          398
+          -
+          458
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parsePhysicalResources
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          PhysicalParser.parsePhysicalResources(physicalResourcesNode)
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          119
+        </td>
+        <td>
+          503
+          -
+          540
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toSet
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources.map(_.`type`).toSet
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          118
+        </td>
+        <td>
+          503
+          -
+          534
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources.map(_.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          121
+        </td>
+        <td>
+          561
+          -
+          583
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromNode
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromNode(xml, &quot;Tasks&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          147
+        </td>
+        <td>
+          548
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          tasksNode &lt;- fromNode(xml, &quot;Tasks&quot;)\r\n      humanResourcesNode &lt;- fromNode(xml, &quot;HumanResources&quot;)\r\n      humanResources &lt;- HumanParser.parseHumanResources(humanResourcesNode, physicalTypes)\r\n      tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)\r\n\r\n      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n\r\n\r\n      productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          120
+        </td>
+        <td>
+          548
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          tasksNode &lt;- fromNode(xml, &quot;Tasks&quot;)\r\n      humanResourcesNode &lt;- fromNode(xml, &quot;HumanResources&quot;)\r\n      humanResources &lt;- HumanParser.parseHumanResources(humanResourcesNode, physicalTypes)\r\n      tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)\r\n\r\n      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n\r\n\r\n      productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          122
+        </td>
+        <td>
+          591
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          humanResourcesNode &lt;- fromNode(xml, &quot;HumanResources&quot;)\r\n      humanResources &lt;- HumanParser.parseHumanResources(humanResourcesNode, physicalTypes)\r\n      tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)\r\n\r\n      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n\r\n\r\n      productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          123
+        </td>
+        <td>
+          613
+          -
+          644
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromNode
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromNode(xml, &quot;HumanResources&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          125
+        </td>
+        <td>
+          670
+          -
+          736
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseHumanResources
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          HumanParser.parseHumanResources(humanResourcesNode, physicalTypes)
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          124
+        </td>
+        <td>
+          652
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          humanResources &lt;- HumanParser.parseHumanResources(humanResourcesNode, physicalTypes)\r\n      tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)\r\n\r\n      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n\r\n\r\n      productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          128
+        </td>
+        <td>
+          753
+          -
+          824
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseTasks
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          127
+        </td>
+        <td>
+          744
+          -
+          972
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)\r\n\r\n      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          126
+        </td>
+        <td>
+          744
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          tasks &lt;- TaskParser.parseTasks(tasksNode, physicalResources, humanResourcesNode)\r\n\r\n      validTasks = tasks.map(task =&gt; task.id.id -&gt; task).toMap\r\n      physicalTypes: Set[PhysicalInType] = physicalResources.map(_.`type`).toSet\r\n\r\n\r\n      productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          131
+        </td>
+        <td>
+          865
+          -
+          883
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          -&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.id.id -&gt; task
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          130
+        </td>
+        <td>
+          847
+          -
+          884
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          tasks.map(task =&gt; task.id.id -&gt; task)
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          129
+        </td>
+        <td>
+          847
+          -
+          890
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          toMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          tasks.map(task =&gt; task.id.id -&gt; task).toMap
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          133
+        </td>
+        <td>
+          935
+          -
+          972
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toSet
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources.map(_.`type`).toSet
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          132
+        </td>
+        <td>
+          935
+          -
+          966
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalResources.map(_.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          146
+        </td>
+        <td>
+          984
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          134
+        </td>
+        <td>
+          984
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          productsNode &lt;- fromNode(xml, &quot;Products&quot;)\r\n      products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          135
+        </td>
+        <td>
+          1000
+          -
+          1025
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromNode
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromNode(xml, &quot;Products&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          137
+        </td>
+        <td>
+          1033
+          -
+          1148
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          136
+        </td>
+        <td>
+          1033
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          products &lt;- ProductParser.parseProducts(productsNode, validTasks)\r\n      validProductIds = products.map(_.id).toSet\r\n\r\n      ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          138
+        </td>
+        <td>
+          1045
+          -
+          1098
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseProducts
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          ProductParser.parseProducts(productsNode, validTasks)
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          140
+        </td>
+        <td>
+          1124
+          -
+          1148
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toSet
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          products.map(_.id).toSet
+        </td>
+      </tr><tr>
+        <td>
+          30
+        </td>
+        <td>
+          139
+        </td>
+        <td>
+          1124
+          -
+          1142
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          products.map(_.id)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          142
+        </td>
+        <td>
+          1172
+          -
+          1195
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromNode
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromNode(xml, &quot;Orders&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          145
+        </td>
+        <td>
+          1158
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          141
+        </td>
+        <td>
+          1158
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          ordersNode &lt;- fromNode(xml, &quot;Orders&quot;)\r\n      orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          144
+        </td>
+        <td>
+          1213
+          -
+          1265
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseOrders
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          OrderParser.parseOrders(ordersNode, validProductIds)
+        </td>
+      </tr><tr>
+        <td>
+          33
+        </td>
+        <td>
+          143
+        </td>
+        <td>
+          1203
+          -
+          1466
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          orders &lt;- OrderParser.parseOrders(ordersNode, validProductIds)\r\n\r\n    } yield Production(\r\n      physicalResources = physicalResources,\r\n      taskResources = tasks,\r\n      humanResources = humanResources,\r\n      products = products,\r\n      orders = orders\r\n    )
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

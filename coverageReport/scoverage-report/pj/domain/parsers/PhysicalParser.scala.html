@@ -1,0 +1,598 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          pj\domain\parsers\PhysicalParser.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package pj.domain.parsers
+</span>2 <span style=''>
+</span>3 <span style=''>import pj.domain.*
+</span>4 <span style=''>import pj.domain.DomainError.{InvalidPhysicalId, InvalidPhysicalType}
+</span>5 <span style=''>import pj.xml.XML.*
+</span>6 <span style=''>
+</span>7 <span style=''>import scala.xml.Node
+</span>8 <span style=''>
+</span>9 <span style=''>object PhysicalParser{
+</span>10 <span style=''>  
+</span>11 <span style=''>  </span><span style='background: #AEF1AE'>def parsePhysicalResources</span><span style=''>(node: Node): Result[List[PhysicalIn]] =
+</span>12 <span style=''>    val physicalNodes = </span><span style='background: #AEF1AE'>node \ &quot;Physical&quot;</span><span style=''>
+</span>13 <span style=''>    </span><span style='background: #AEF1AE'>traverse(physicalNodes, parsePhysicalResource)</span><span style=''>
+</span>14 <span style=''>
+</span>15 <span style=''>  </span><span style='background: #AEF1AE'>private def parsePhysicalResource</span><span style=''>(node: Node): Result[PhysicalIn] =
+</span>16 <span style=''>    </span><span style='background: #AEF1AE'>fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;
+</span>17 <span style=''></span><span style='background: #AEF1AE'>      if (!idStr.startsWith(&quot;PRS_&quot;))
+</span>18 <span style=''></span><span style='background: #AEF1AE'>        Left(InvalidPhysicalId(idStr))
+</span>19 <span style=''></span><span style='background: #AEF1AE'>      else
+</span>20 <span style=''></span><span style='background: #AEF1AE'>        fromAttribute(node, &quot;type&quot;).flatMap { typeStr =&gt;
+</span>21 <span style=''></span><span style='background: #AEF1AE'>          if (!typeStr.startsWith(&quot;PRST &quot;))
+</span>22 <span style=''></span><span style='background: #AEF1AE'>            Left(InvalidPhysicalType(typeStr))
+</span>23 <span style=''></span><span style='background: #AEF1AE'>          else
+</span>24 <span style=''></span><span style='background: #AEF1AE'>            println(&quot;Physical: &quot;+ idStr + &quot;, &quot; + typeStr)
+</span>25 <span style=''></span><span style='background: #AEF1AE'>            Right(PhysicalIn(PhysicalInId(idStr), PhysicalInType(typeStr)))
+</span>26 <span style=''></span><span style='background: #AEF1AE'>        }
+</span>27 <span style=''></span><span style='background: #AEF1AE'>    }</span><span style=''>
+</span>28 <span style=''>}
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          11
+        </td>
+        <td>
+          69
+        </td>
+        <td>
+          198
+          -
+          224
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parsePhysicalResources
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          def parsePhysicalResources
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          66
+        </td>
+        <td>
+          290
+          -
+          307
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          \\
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          node \\ &quot;Physical&quot;
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          68
+        </td>
+        <td>
+          337
+          -
+          358
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parsePhysicalResource
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          parsePhysicalResource
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          67
+        </td>
+        <td>
+          313
+          -
+          359
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          traverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          traverse(physicalNodes, parsePhysicalResource)
+        </td>
+      </tr><tr>
+        <td>
+          15
+        </td>
+        <td>
+          87
+        </td>
+        <td>
+          365
+          -
+          398
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          parsePhysicalResource
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          private def parsePhysicalResource
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          71
+        </td>
+        <td>
+          438
+          -
+          463
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          70
+        </td>
+        <td>
+          438
+          -
+          893
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;id&quot;).flatMap { idStr =&gt;\r\n      if (!idStr.startsWith(&quot;PRS_&quot;))\r\n        Left(InvalidPhysicalId(idStr))\r\n      else\r\n        fromAttribute(node, &quot;type&quot;).flatMap { typeStr =&gt;\r\n          if (!typeStr.startsWith(&quot;PRST &quot;))\r\n            Left(InvalidPhysicalType(typeStr))\r\n          else\r\n            println(&quot;Physical: &quot;+ idStr + &quot;, &quot; + typeStr)\r\n            Right(PhysicalIn(PhysicalInId(idStr), PhysicalInType(typeStr)))\r\n        }\r\n    }
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          72
+        </td>
+        <td>
+          495
+          -
+          519
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          startsWith
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          idStr.startsWith(&quot;PRS_&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          74
+        </td>
+        <td>
+          530
+          -
+          560
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(InvalidPhysicalId(idStr))
+        </td>
+      </tr><tr>
+        <td>
+          18
+        </td>
+        <td>
+          73
+        </td>
+        <td>
+          530
+          -
+          534
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          86
+        </td>
+        <td>
+          582
+          -
+          886
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;type&quot;).flatMap { typeStr =&gt;\r\n          if (!typeStr.startsWith(&quot;PRST &quot;))\r\n            Left(InvalidPhysicalType(typeStr))\r\n          else\r\n            println(&quot;Physical: &quot;+ idStr + &quot;, &quot; + typeStr)\r\n            Right(PhysicalIn(PhysicalInId(idStr), PhysicalInType(typeStr)))\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          76
+        </td>
+        <td>
+          582
+          -
+          609
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          fromAttribute
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;type&quot;)
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          75
+        </td>
+        <td>
+          582
+          -
+          886
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          fromAttribute(node, &quot;type&quot;).flatMap { typeStr =&gt;\r\n          if (!typeStr.startsWith(&quot;PRST &quot;))\r\n            Left(InvalidPhysicalType(typeStr))\r\n          else\r\n            println(&quot;Physical: &quot;+ idStr + &quot;, &quot; + typeStr)\r\n            Right(PhysicalIn(PhysicalInId(idStr), PhysicalInType(typeStr)))\r\n        }
+        </td>
+      </tr><tr>
+        <td>
+          21
+        </td>
+        <td>
+          77
+        </td>
+        <td>
+          647
+          -
+          674
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          startsWith
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          typeStr.startsWith(&quot;PRST &quot;)
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          79
+        </td>
+        <td>
+          689
+          -
+          723
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left(InvalidPhysicalType(typeStr))
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          78
+        </td>
+        <td>
+          689
+          -
+          693
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          83
+        </td>
+        <td>
+          761
+          -
+          780
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Physical: &quot;+ idStr
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          80
+        </td>
+        <td>
+          753
+          -
+          798
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          println
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          println(&quot;Physical: &quot;+ idStr + &quot;, &quot; + typeStr)
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          82
+        </td>
+        <td>
+          761
+          -
+          787
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Physical: &quot;+ idStr + &quot;, &quot;
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          85
+        </td>
+        <td>
+          753
+          -
+          875
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          println(&quot;Physical: &quot;+ idStr + &quot;, &quot; + typeStr)\r\n            Right(PhysicalIn(PhysicalInId(idStr), PhysicalInType(typeStr)))
+        </td>
+      </tr><tr>
+        <td>
+          24
+        </td>
+        <td>
+          81
+        </td>
+        <td>
+          761
+          -
+          797
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          +
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          &quot;Physical: &quot;+ idStr + &quot;, &quot; + typeStr
+        </td>
+      </tr><tr>
+        <td>
+          25
+        </td>
+        <td>
+          84
+        </td>
+        <td>
+          812
+          -
+          817
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Right
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>

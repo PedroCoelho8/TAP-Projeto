@@ -1,0 +1,1705 @@
+<html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title id="title">
+          pj\domain\schedule\ScheduleMS01.scala.html
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/css/theme.default.min.css" type="text/css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.20.1/js/jquery.tablesorter.min.js"></script><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css"/><script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script><script type="text/javascript">
+        $(document).ready(function() {$(".tablesorter").tablesorter();});
+      </script>
+        <style>
+          table.codegrid { font-family: monospace; font-size: 12px; width: auto!important; }table.statementlist { width: auto!important; font-size: 13px; } table.codegrid td { padding: 0!important; border: 0!important } table td.linenumber { width: 40px!important; } 
+        </style>
+      </head>
+      <body style="font-family: monospace;">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#codegrid" data-toggle="tab">Codegrid</a>
+          </li>
+          <li>
+            <a href="#statementlist" data-toggle="tab">Statement List</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="codegrid">
+            <pre style='font-size: 12pt; font-family: courier, monospace;'>1 <span style=''>package pj.domain.schedule
+</span>2 <span style=''>
+</span>3 <span style=''>import scala.xml.Elem
+</span>4 <span style=''>import pj.domain.*
+</span>5 <span style=''>import pj.domain.parsers.*
+</span>6 <span style=''>import pj.xml.XMLWriter
+</span>7 <span style=''>
+</span>8 <span style=''>object ScheduleMS01 extends Schedule:
+</span>9 <span style=''>
+</span>10 <span style=''>  </span><span style='background: #AEF1AE'>def create</span><span style=''>(xml: Elem): Result[Elem] =
+</span>11 <span style=''>    try
+</span>12 <span style=''>      </span><span style='background: #AEF1AE'>ProductionParser.parseProduction(xml) match
+</span>13 <span style=''></span><span style='background: #AEF1AE'>        case Left(error) =&gt; Left(error)
+</span>14 <span style=''></span><span style='background: #AEF1AE'>
+</span>15 <span style=''></span><span style='background: #AEF1AE'>        case Right(production) =&gt;
+</span>16 <span style=''></span><span style='background: #AEF1AE'>          val (_, allTaskSchedulesReversed) = production.orders.foldLeft((0, List.empty[TaskSchedule])):
+</span>17 <span style=''></span><span style='background: #AEF1AE'>            case ((globalTime, accumulatedSchedules), order) =&gt;
+</span>18 <span style=''></span><span style='background: #AEF1AE'>
+</span>19 <span style=''></span><span style='background: #AEF1AE'>              val (latestEndTime, updatedSchedulesReversed) = (1 to order.quantity.quantity).foldLeft((globalTime, accumulatedSchedules)):
+</span>20 <span style=''></span><span style='background: #AEF1AE'>                case ((currentTime, innerSchedules), productNumber) =&gt;
+</span>21 <span style=''></span><span style='background: #AEF1AE'>
+</span>22 <span style=''></span><span style='background: #AEF1AE'>                  production.products.find(_.id == order.prdref) match
+</span>23 <span style=''></span><span style='background: #AEF1AE'>                    case None </span><span style='background: #F0ADAD'>=&gt; (currentTime, innerSchedules)</span><span style='background: #AEF1AE'>
+</span>24 <span style=''></span><span style='background: #AEF1AE'>
+</span>25 <span style=''></span><span style='background: #AEF1AE'>                    case Some(product) =&gt;
+</span>26 <span style=''></span><span style='background: #AEF1AE'>                      val (finalEndTime, newTasksReversed) = product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):
+</span>27 <span style=''></span><span style='background: #AEF1AE'>                        case ((start, taskAcc), taskRef) =&gt;
+</span>28 <span style=''></span><span style='background: #AEF1AE'>                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match
+</span>29 <span style=''></span><span style='background: #AEF1AE'>                            case None </span><span style='background: #F0ADAD'>=&gt; (start, taskAcc)</span><span style='background: #AEF1AE'>
+</span>30 <span style=''></span><span style='background: #AEF1AE'>
+</span>31 <span style=''></span><span style='background: #AEF1AE'>                            case Some(task) =&gt;
+</span>32 <span style=''></span><span style='background: #AEF1AE'>                              val requiredTypes = task.physicalResources.map(_.`type`).toSet
+</span>33 <span style=''></span><span style='background: #AEF1AE'>
+</span>34 <span style=''></span><span style='background: #AEF1AE'>                              val physicals = requiredTypes.flatMap(t =&gt;
+</span>35 <span style=''></span><span style='background: #AEF1AE'>                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))
+</span>36 <span style=''></span><span style='background: #AEF1AE'>                              ).toList
+</span>37 <span style=''></span><span style='background: #AEF1AE'>
+</span>38 <span style=''></span><span style='background: #AEF1AE'>                              val end = start + task.time.time
+</span>39 <span style=''></span><span style='background: #AEF1AE'>                              
+</span>40 <span style=''></span><span style='background: #AEF1AE'>                              val physicalsWithTypes = physicals.flatMap { physical =&gt;
+</span>41 <span style=''></span><span style='background: #AEF1AE'>                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))
+</span>42 <span style=''></span><span style='background: #AEF1AE'>                              }
+</span>43 <span style=''></span><span style='background: #AEF1AE'>
+</span>44 <span style=''></span><span style='background: #AEF1AE'>                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):
+</span>45 <span style=''></span><span style='background: #AEF1AE'>                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;
+</span>46 <span style=''></span><span style='background: #AEF1AE'>                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match
+</span>47 <span style=''></span><span style='background: #AEF1AE'>                                    case Some(human) =&gt;
+</span>48 <span style=''></span><span style='background: #AEF1AE'>                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)
+</span>49 <span style=''></span><span style='background: #AEF1AE'>                                    case None =&gt;
+</span>50 <span style=''></span><span style='background: #AEF1AE'>                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match
+</span>51 <span style=''></span><span style='background: #AEF1AE'>                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)
+</span>52 <span style=''></span><span style='background: #AEF1AE'>                                        case None </span><span style='background: #F0ADAD'>=&gt; (availableHumans, humansList)</span><span style='background: #AEF1AE'>
+</span>53 <span style=''></span><span style='background: #AEF1AE'>
+</span>54 <span style=''></span><span style='background: #AEF1AE'>                              val schedule = TaskSchedule(
+</span>55 <span style=''></span><span style='background: #AEF1AE'>                                order = order.id,
+</span>56 <span style=''></span><span style='background: #AEF1AE'>                                productNumber = ProductNumber(productNumber),
+</span>57 <span style=''></span><span style='background: #AEF1AE'>                                task = task.id,
+</span>58 <span style=''></span><span style='background: #AEF1AE'>                                start = StartValue(start),
+</span>59 <span style=''></span><span style='background: #AEF1AE'>                                end = EndValue(end),
+</span>60 <span style=''></span><span style='background: #AEF1AE'>                                physicalResources = physicals,
+</span>61 <span style=''></span><span style='background: #AEF1AE'>                                humanResources = assignedHumans.reverse
+</span>62 <span style=''></span><span style='background: #AEF1AE'>                              )
+</span>63 <span style=''></span><span style='background: #AEF1AE'>
+</span>64 <span style=''></span><span style='background: #AEF1AE'>                              (end, schedule :: taskAcc)
+</span>65 <span style=''></span><span style='background: #AEF1AE'>
+</span>66 <span style=''></span><span style='background: #AEF1AE'>                      val newTasks = newTasksReversed.reverse
+</span>67 <span style=''></span><span style='background: #AEF1AE'>                      (finalEndTime, innerSchedules ++ newTasks)
+</span>68 <span style=''></span><span style='background: #AEF1AE'>
+</span>69 <span style=''></span><span style='background: #AEF1AE'>              (latestEndTime, updatedSchedulesReversed)
+</span>70 <span style=''></span><span style='background: #AEF1AE'>
+</span>71 <span style=''></span><span style='background: #AEF1AE'>          XMLWriter.toXmlFile(allTaskSchedulesReversed) match
+</span>72 <span style=''></span><span style='background: #AEF1AE'>            case Right(xmlString) =&gt;
+</span>73 <span style=''></span><span style='background: #AEF1AE'>              val xmlElem = scala.xml.XML.loadString(xmlString)
+</span>74 <span style=''></span><span style='background: #AEF1AE'>              Right(xmlElem)
+</span>75 <span style=''></span><span style='background: #AEF1AE'>            case Left(err) </span><span style='background: #F0ADAD'>=&gt; Left(err)</span><span style=''>
+</span>76 <span style=''>
+</span>77 <span style=''>    catch
+</span>78 <span style=''>      case e: Exception </span><span style='background: #F0ADAD'>=&gt;
+</span>79 <span style=''></span><span style='background: #F0ADAD'>        Left(DomainError.XMLError(s&quot;Erro ao criar Schedule: ${e.getMessage}&quot;))</span><span style=''>
+</span></pre>
+          </div>
+          <div class="tab-pane" id="statementlist">
+            <table cellspacing="0" cellpadding="0" class="table statementlist">
+      <tr>
+        <th>Line</th>
+        <th>Stmt Id</th>
+        <th>Pos</th>
+        <th>Tree</th>
+        <th>Symbol</th>
+        <th>Tests</th>
+        <th>Code</th>
+      </tr><tr>
+        <td>
+          10
+        </td>
+        <td>
+          305
+        </td>
+        <td>
+          171
+          -
+          181
+        </td>
+        <td>
+          DefDef
+        </td>
+        <td>
+          create
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          def create
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          300
+        </td>
+        <td>
+          225
+          -
+          3878
+        </td>
+        <td>
+          Match
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          ProductionParser.parseProduction(xml) match\r\n        case Left(error) =&gt; Left(error)\r\n\r\n        case Right(production) =&gt;\r\n          val (_, allTaskSchedulesReversed) = production.orders.foldLeft((0, List.empty[TaskSchedule])):\r\n            case ((globalTime, accumulatedSchedules), order) =&gt;\r\n\r\n              val (latestEndTime, updatedSchedulesReversed) = (1 to order.quantity.quantity).foldLeft((globalTime, accumulatedSchedules)):\r\n                case ((currentTime, innerSchedules), productNumber) =&gt;\r\n\r\n                  production.products.find(_.id == order.prdref) match\r\n                    case None =&gt; (currentTime, innerSchedules)\r\n\r\n                    case Some(product) =&gt;\r\n                      val (finalEndTime, newTasksReversed) = product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):\r\n                        case ((start, taskAcc), taskRef) =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)\r\n\r\n                      val newTasks = newTasksReversed.reverse\r\n                      (finalEndTime, innerSchedules ++ newTasks)\r\n\r\n              (latestEndTime, updatedSchedulesReversed)\r\n\r\n          XMLWriter.toXmlFile(allTaskSchedulesReversed) match\r\n            case Right(xmlString) =&gt;\r\n              val xmlElem = scala.xml.XML.loadString(xmlString)\r\n              Right(xmlElem)\r\n            case Left(err) =&gt; Left(err)
+        </td>
+      </tr><tr>
+        <td>
+          12
+        </td>
+        <td>
+          240
+        </td>
+        <td>
+          225
+          -
+          262
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          parseProduction
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          ProductionParser.parseProduction(xml)
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          241
+        </td>
+        <td>
+          298
+          -
+          302
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          13
+        </td>
+        <td>
+          242
+        </td>
+        <td>
+          295
+          -
+          309
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt; Left(error)
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          245
+        </td>
+        <td>
+          425
+          -
+          435
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          empty
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          List.empty
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          244
+        </td>
+        <td>
+          425
+          -
+          429
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          List
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          List
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          292
+        </td>
+        <td>
+          391
+          -
+          391
+        </td>
+        <td>
+          Typed
+        </td>
+        <td>
+          allTaskSchedulesReversed
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          
+        </td>
+      </tr><tr>
+        <td>
+          16
+        </td>
+        <td>
+          299
+        </td>
+        <td>
+          358
+          -
+          3878
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          val (_, allTaskSchedulesReversed) = production.orders.foldLeft((0, List.empty[TaskSchedule])):\r\n            case ((globalTime, accumulatedSchedules), order) =&gt;\r\n\r\n              val (latestEndTime, updatedSchedulesReversed) = (1 to order.quantity.quantity).foldLeft((globalTime, accumulatedSchedules)):\r\n                case ((currentTime, innerSchedules), productNumber) =&gt;\r\n\r\n                  production.products.find(_.id == order.prdref) match\r\n                    case None =&gt; (currentTime, innerSchedules)\r\n\r\n                    case Some(product) =&gt;\r\n                      val (finalEndTime, newTasksReversed) = product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):\r\n                        case ((start, taskAcc), taskRef) =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)\r\n\r\n                      val newTasks = newTasksReversed.reverse\r\n                      (finalEndTime, innerSchedules ++ newTasks)\r\n\r\n              (latestEndTime, updatedSchedulesReversed)\r\n\r\n          XMLWriter.toXmlFile(allTaskSchedulesReversed) match\r\n            case Right(xmlString) =&gt;\r\n              val xmlElem = scala.xml.XML.loadString(xmlString)\r\n              Right(xmlElem)\r\n            case Left(err) =&gt; Left(err)
+        </td>
+      </tr><tr>
+        <td>
+          17
+        </td>
+        <td>
+          243
+        </td>
+        <td>
+          394
+          -
+          3639
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          foldLeft
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          production.orders.foldLeft((0, List.empty[TaskSchedule])):\r\n            case ((globalTime, accumulatedSchedules), order) =&gt;\r\n\r\n              val (latestEndTime, updatedSchedulesReversed) = (1 to order.quantity.quantity).foldLeft((globalTime, accumulatedSchedules)):\r\n                case ((currentTime, innerSchedules), productNumber) =&gt;\r\n\r\n                  production.products.find(_.id == order.prdref) match\r\n                    case None =&gt; (currentTime, innerSchedules)\r\n\r\n                    case Some(product) =&gt;\r\n                      val (finalEndTime, newTasksReversed) = product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):\r\n                        case ((start, taskAcc), taskRef) =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)\r\n\r\n                      val newTasks = newTasksReversed.reverse\r\n                      (finalEndTime, innerSchedules ++ newTasks)\r\n\r\n              (latestEndTime, updatedSchedulesReversed)
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          247
+        </td>
+        <td>
+          584
+          -
+          612
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          to
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          1 to order.quantity.quantity
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          291
+        </td>
+        <td>
+          535
+          -
+          3639
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          val (latestEndTime, updatedSchedulesReversed) = (1 to order.quantity.quantity).foldLeft((globalTime, accumulatedSchedules)):\r\n                case ((currentTime, innerSchedules), productNumber) =&gt;\r\n\r\n                  production.products.find(_.id == order.prdref) match\r\n                    case None =&gt; (currentTime, innerSchedules)\r\n\r\n                    case Some(product) =&gt;\r\n                      val (finalEndTime, newTasksReversed) = product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):\r\n                        case ((start, taskAcc), taskRef) =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)\r\n\r\n                      val newTasks = newTasksReversed.reverse\r\n                      (finalEndTime, innerSchedules ++ newTasks)\r\n\r\n              (latestEndTime, updatedSchedulesReversed)
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          290
+        </td>
+        <td>
+          580
+          -
+          580
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          
+        </td>
+      </tr><tr>
+        <td>
+          19
+        </td>
+        <td>
+          248
+        </td>
+        <td>
+          584
+          -
+          585
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          intWrapper
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          1
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          289
+        </td>
+        <td>
+          729
+          -
+          3580
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt;\r\n\r\n                  production.products.find(_.id == order.prdref) match\r\n                    case None =&gt; (currentTime, innerSchedules)\r\n\r\n                    case Some(product) =&gt;\r\n                      val (finalEndTime, newTasksReversed) = product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):\r\n                        case ((start, taskAcc), taskRef) =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)\r\n\r\n                      val newTasks = newTasksReversed.reverse\r\n                      (finalEndTime, innerSchedules ++ newTasks)
+        </td>
+      </tr><tr>
+        <td>
+          20
+        </td>
+        <td>
+          246
+        </td>
+        <td>
+          583
+          -
+          3580
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          foldLeft
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          (1 to order.quantity.quantity).foldLeft((globalTime, accumulatedSchedules)):\r\n                case ((currentTime, innerSchedules), productNumber) =&gt;\r\n\r\n                  production.products.find(_.id == order.prdref) match\r\n                    case None =&gt; (currentTime, innerSchedules)\r\n\r\n                    case Some(product) =&gt;\r\n                      val (finalEndTime, newTasksReversed) = product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):\r\n                        case ((start, taskAcc), taskRef) =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)\r\n\r\n                      val newTasks = newTasksReversed.reverse\r\n                      (finalEndTime, innerSchedules ++ newTasks)
+        </td>
+      </tr><tr>
+        <td>
+          22
+        </td>
+        <td>
+          249
+        </td>
+        <td>
+          753
+          -
+          799
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          production.products.find(_.id == order.prdref)
+        </td>
+      </tr><tr>
+        <td>
+          23
+        </td>
+        <td>
+          250
+        </td>
+        <td>
+          837
+          -
+          869
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          =&gt; (currentTime, innerSchedules)
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          253
+        </td>
+        <td>
+          1017
+          -
+          1027
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          empty
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          List.empty
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          285
+        </td>
+        <td>
+          974
+          -
+          974
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          apply
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          288
+        </td>
+        <td>
+          938
+          -
+          3580
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          val (finalEndTime, newTasksReversed) = product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):\r\n                        case ((start, taskAcc), taskRef) =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)\r\n\r\n                      val newTasks = newTasksReversed.reverse\r\n                      (finalEndTime, innerSchedules ++ newTasks)
+        </td>
+      </tr><tr>
+        <td>
+          26
+        </td>
+        <td>
+          252
+        </td>
+        <td>
+          1017
+          -
+          1021
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          List
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          List
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          284
+        </td>
+        <td>
+          1103
+          -
+          3449
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)
+        </td>
+      </tr><tr>
+        <td>
+          27
+        </td>
+        <td>
+          251
+        </td>
+        <td>
+          977
+          -
+          3449
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          foldLeft
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          product.taskRefs.foldLeft((currentTime, List.empty[TaskSchedule])):\r\n                        case ((start, taskAcc), taskRef) =&gt;\r\n                          production.taskResources.find(_.id.id == taskRef.tskref.tskref) match\r\n                            case None =&gt; (start, taskAcc)\r\n\r\n                            case Some(task) =&gt;\r\n                              val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)
+        </td>
+      </tr><tr>
+        <td>
+          28
+        </td>
+        <td>
+          254
+        </td>
+        <td>
+          1133
+          -
+          1196
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          production.taskResources.find(_.id.id == taskRef.tskref.tskref)
+        </td>
+      </tr><tr>
+        <td>
+          29
+        </td>
+        <td>
+          255
+        </td>
+        <td>
+          1242
+          -
+          1261
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          =&gt; (start, taskAcc)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          256
+        </td>
+        <td>
+          1363
+          -
+          1399
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.map(_.`type`)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          283
+        </td>
+        <td>
+          1343
+          -
+          3449
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          val requiredTypes = task.physicalResources.map(_.`type`).toSet\r\n\r\n                              val physicals = requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList\r\n\r\n                              val end = start + task.time.time\r\n                              \r\n                              val physicalsWithTypes = physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }\r\n\r\n                              val (_, assignedHumans) = physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)\r\n\r\n                              val schedule = TaskSchedule(\r\n                                order = order.id,\r\n                                productNumber = ProductNumber(productNumber),\r\n                                task = task.id,\r\n                                start = StartValue(start),\r\n                                end = EndValue(end),\r\n                                physicalResources = physicals,\r\n                                humanResources = assignedHumans.reverse\r\n                              )\r\n\r\n                              (end, schedule :: taskAcc)
+        </td>
+      </tr><tr>
+        <td>
+          32
+        </td>
+        <td>
+          257
+        </td>
+        <td>
+          1363
+          -
+          1405
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toSet
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          task.physicalResources.map(_.`type`).toSet
+        </td>
+      </tr><tr>
+        <td>
+          34
+        </td>
+        <td>
+          258
+        </td>
+        <td>
+          1455
+          -
+          1624
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              )
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          259
+        </td>
+        <td>
+          1515
+          -
+          1591
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))
+        </td>
+      </tr><tr>
+        <td>
+          35
+        </td>
+        <td>
+          260
+        </td>
+        <td>
+          1515
+          -
+          1563
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          production.physicalResources.find(_.`type` == t)
+        </td>
+      </tr><tr>
+        <td>
+          36
+        </td>
+        <td>
+          261
+        </td>
+        <td>
+          1455
+          -
+          1631
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          toList
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          requiredTypes.flatMap(t =&gt;\r\n                                production.physicalResources.find(_.`type` == t).map(p =&gt; PhysicalOut(p.id))\r\n                              ).toList
+        </td>
+      </tr><tr>
+        <td>
+          40
+        </td>
+        <td>
+          262
+        </td>
+        <td>
+          1786
+          -
+          1969
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          flatMap
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicals.flatMap { physical =&gt;\r\n                                production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))\r\n                              }
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          264
+        </td>
+        <td>
+          1851
+          -
+          1905
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          production.physicalResources.find(_.id == physical.id)
+        </td>
+      </tr><tr>
+        <td>
+          41
+        </td>
+        <td>
+          263
+        </td>
+        <td>
+          1851
+          -
+          1936
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          map
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          production.physicalResources.find(_.id == physical.id).map(p =&gt; (physical, p.`type`))
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          280
+        </td>
+        <td>
+          2026
+          -
+          2026
+        </td>
+        <td>
+          Typed
+        </td>
+        <td>
+          assignedHumans
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          267
+        </td>
+        <td>
+          2085
+          -
+          2095
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          empty
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          List.empty
+        </td>
+      </tr><tr>
+        <td>
+          44
+        </td>
+        <td>
+          266
+        </td>
+        <td>
+          2085
+          -
+          2089
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          List
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          List
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          265
+        </td>
+        <td>
+          2029
+          -
+          2864
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          foldLeft
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          physicalsWithTypes.foldLeft((production.humanResources, List.empty[HumanOut])):\r\n                                case ((availableHumans, humansList), (physical, requiredType)) =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)
+        </td>
+      </tr><tr>
+        <td>
+          45
+        </td>
+        <td>
+          279
+        </td>
+        <td>
+          2205
+          -
+          2864
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt;\r\n                                  availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                    case Some(human) =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)\r\n                                    case None =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)
+        </td>
+      </tr><tr>
+        <td>
+          46
+        </td>
+        <td>
+          268
+        </td>
+        <td>
+          2243
+          -
+          2312
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          availableHumans.find(h =&gt; h.handles.exists(_.`type` == requiredType))
+        </td>
+      </tr><tr>
+        <td>
+          46
+        </td>
+        <td>
+          269
+        </td>
+        <td>
+          2269
+          -
+          2311
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          exists
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          h.handles.exists(_.`type` == requiredType)
+        </td>
+      </tr><tr>
+        <td>
+          47
+        </td>
+        <td>
+          272
+        </td>
+        <td>
+          2373
+          -
+          2490
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt;\r\n                                      (availableHumans.filterNot(_ == human), HumanOut(human.name) :: humansList)
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          271
+        </td>
+        <td>
+          2455
+          -
+          2489
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          ::
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          HumanOut(human.name) :: humansList
+        </td>
+      </tr><tr>
+        <td>
+          48
+        </td>
+        <td>
+          270
+        </td>
+        <td>
+          2416
+          -
+          2453
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          filterNot
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          availableHumans.filterNot(_ == human)
+        </td>
+      </tr><tr>
+        <td>
+          49
+        </td>
+        <td>
+          278
+        </td>
+        <td>
+          2538
+          -
+          2864
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt;\r\n                                      production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType)) match\r\n                                        case Some(human) =&gt; (availableHumans, HumanOut(human.name) :: humansList)\r\n                                        case None =&gt; (availableHumans, humansList)
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          274
+        </td>
+        <td>
+          2616
+          -
+          2658
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          exists
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          h.handles.exists(_.`type` == requiredType)
+        </td>
+      </tr><tr>
+        <td>
+          50
+        </td>
+        <td>
+          273
+        </td>
+        <td>
+          2580
+          -
+          2659
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          find
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          production.humanResources.find(h =&gt; h.handles.exists(_.`type` == requiredType))
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          276
+        </td>
+        <td>
+          2724
+          -
+          2780
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          =&gt; (availableHumans, HumanOut(human.name) :: humansList)
+        </td>
+      </tr><tr>
+        <td>
+          51
+        </td>
+        <td>
+          275
+        </td>
+        <td>
+          2745
+          -
+          2779
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          ::
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          HumanOut(human.name) :: humansList
+        </td>
+      </tr><tr>
+        <td>
+          52
+        </td>
+        <td>
+          277
+        </td>
+        <td>
+          2832
+          -
+          2864
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          =&gt; (availableHumans, humansList)
+        </td>
+      </tr><tr>
+        <td>
+          61
+        </td>
+        <td>
+          281
+        </td>
+        <td>
+          3334
+          -
+          3356
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          reverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          assignedHumans.reverse
+        </td>
+      </tr><tr>
+        <td>
+          64
+        </td>
+        <td>
+          282
+        </td>
+        <td>
+          3429
+          -
+          3448
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          ::
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          schedule :: taskAcc
+        </td>
+      </tr><tr>
+        <td>
+          66
+        </td>
+        <td>
+          286
+        </td>
+        <td>
+          3490
+          -
+          3514
+        </td>
+        <td>
+          Select
+        </td>
+        <td>
+          reverse
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          newTasksReversed.reverse
+        </td>
+      </tr><tr>
+        <td>
+          67
+        </td>
+        <td>
+          287
+        </td>
+        <td>
+          3553
+          -
+          3579
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          ++
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          innerSchedules ++ newTasks
+        </td>
+      </tr><tr>
+        <td>
+          71
+        </td>
+        <td>
+          293
+        </td>
+        <td>
+          3653
+          -
+          3698
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          toXmlFile
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          XMLWriter.toXmlFile(allTaskSchedulesReversed)
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          294
+        </td>
+        <td>
+          3772
+          -
+          3807
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          loadString
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          scala.xml.XML.loadString(xmlString)
+        </td>
+      </tr><tr>
+        <td>
+          73
+        </td>
+        <td>
+          296
+        </td>
+        <td>
+          3758
+          -
+          3837
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          val xmlElem = scala.xml.XML.loadString(xmlString)\r\n              Right(xmlElem)
+        </td>
+      </tr><tr>
+        <td>
+          74
+        </td>
+        <td>
+          295
+        </td>
+        <td>
+          3823
+          -
+          3828
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Right
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #AEF1AE">
+          Right
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          298
+        </td>
+        <td>
+          3866
+          -
+          3878
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          =&gt; Left(err)
+        </td>
+      </tr><tr>
+        <td>
+          75
+        </td>
+        <td>
+          297
+        </td>
+        <td>
+          3869
+          -
+          3873
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          78
+        </td>
+        <td>
+          304
+        </td>
+        <td>
+          3917
+          -
+          3999
+        </td>
+        <td>
+          Block
+        </td>
+        <td>
+          &lt;none&gt;
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          =&gt;\r\n        Left(DomainError.XMLError(s&quot;Erro ao criar Schedule: ${e.getMessage}&quot;))
+        </td>
+      </tr><tr>
+        <td>
+          79
+        </td>
+        <td>
+          301
+        </td>
+        <td>
+          3929
+          -
+          3933
+        </td>
+        <td>
+          Ident
+        </td>
+        <td>
+          Left
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          Left
+        </td>
+      </tr><tr>
+        <td>
+          79
+        </td>
+        <td>
+          303
+        </td>
+        <td>
+          3983
+          -
+          3995
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          getMessage
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          e.getMessage
+        </td>
+      </tr><tr>
+        <td>
+          79
+        </td>
+        <td>
+          302
+        </td>
+        <td>
+          3955
+          -
+          3997
+        </td>
+        <td>
+          Apply
+        </td>
+        <td>
+          s
+        </td>
+        <td>
+          
+        </td>
+        <td style="background: #F0ADAD">
+          s&quot;Erro ao criar Schedule: ${e.getMessage}&quot;
+        </td>
+      </tr>
+    </table>
+          </div>
+        </div>
+      </body>
+    </html>
