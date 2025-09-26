@@ -1,59 +1,83 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/JQuLlSSl)
+# TAP-Projeto — Advanced Programming Techniques (Functional Programming)
 
-* The intention of this part of the project is to change the create method:
-* - create a way to have multiple tasks being done at the same time.
-* - the same resource cannot be used at the same time by two tasks.
-* - the complete schedule must schedule all the tasks of all the products needed
-*
-* Based on this requirements there are a few things that can be done:
-* - remain with the same beginning of ProductionParser.parseProduction(xml)
-* - change completely the way the time is being held
-* - multiple tasks may start at the same time or during another tasks' creation
-*
-* For example, consider this:
-* - Order1(Product1); Order2(Product2)
-* - Product1(Task1, Task2); Product2(Task1);
-* - Task1(100, Physical1); Task2(120, Physical2);
-* - Human1(Physical1); Human2(Physical2)
-*
-* In this case the result would be 3 TaskSchedules:
-* - TaskSchedule1(0, 100, Order1, Task1)
-* - TaskSchedule2(100, 200, Order2, Task1)
-* - TaskSchedule3(100, 220, Order1, Task2)
-*
-* QUESTIONS
-*
-* Should there be a defined order? For example, in the case above, TaskSchedule3 was defined as the 3rd because it's the one with the biggest time, but the result could've been:
-*
-* - TaskSchedule1(0, 100, Order1, Task1)
-* - TaskSchedule2(100, 220, Order1, Task2)
-* - TaskSchedule3(100, 200, Order2, Task1)
-*
-* The first one is by time, this one is be Order's number
-* TAP MILESTONE 3
+## Contexto
 
--Nos temos de gerar ficheiros de saída;
+Este repositório corresponde ao projeto prático da unidade curricular de **Técnicas Avançadas de Programação** (TAP), do Mestrado em Engenharia Informática (ISEP, 2024/2025). O objetivo central é conceber e desenvolver uma aplicação usando técnicas de programação funcional, para resolver o problema do agendamento de ordens de produção numa fábrica.
 
--Temos de criar ficheiros certos à mão? Sim, mas somos nos que os fazemos a la pata
+## Objetivos
 
--Temos de colocar no fim o maior “endtime”?  Não temos que nos preocupar.
+- Analisar o problema de scheduling de ordens de produção com múltiplos recursos e restrições.
+- Conceber algoritmos de scheduling utilizando técnicas de programação funcional (Scala), sem mutabilidade.
+- Desenvolver testes unitários, funcionais e baseados em propriedades.
+- Gerar artefactos de input/output em XML, validados por esquemas XSD.
+- Documentar as decisões técnicas e justificações.
 
--Nao podemos paralelizar as tarefas de um mesmo produto
+## Descrição do Problema
 
-- Um humano só pode usar um recurso físico
-- Um recurso físico só pode ser utilizada ao mesmo tempo uma vez
-- Deve haver uma consolidação do melhor tempo: ler o tempo total de cada task se for necessário começar 2 ao mesmo tempo
-- Vamos supor que o Joao pode usar o fisico 1
-- A Maria pode usar o fisico 2, 3
-- A tarefa 1 usa o fisico 1,2
-- A tarefa 2 usa o fisico 1,3
-- Ha 2 produtos, 1 com cada tarefa
-- A ordem poderia ser 
-- Antonio -> 1,1 
-- Maria -> *Esperar o 1*, 2 ,*Esperar o 1*, 3
-- Mas qual é o problema?
-- Se o 2 durar 2 segundos e o 3 durar 3 segundos, esta execução durará 13 segundos, quando poderia ser possível, considerando estas durações
-- Maria: *Esperar o 1*, 3 ,*Esperar o 1*, 2
-- Que duraria 12 segundos
-- Temos de considerar que o tempo total de um produto deve ser comparado em cada iteração
+O sistema deve permitir:
+- Definir ordens de produção (cada uma para um produto e quantidade).
+- Modelar produtos como sequências lineares de tarefas.
+- Descrever tarefas (tempo, recursos físicos necessários).
+- Gerir recursos físicos (máquinas, postos) e humanos (habilidades específicas).
+- Agendar todas as tarefas, garantindo a correta alocação/extensão dos recursos.
+- Persistir o agendamento em disco, em ficheiro XML.
 
+## Milestones e Entregáveis
+
+### Milestone 1 — MVP (Agendamento Ingénuo)
+- Agendamento sequencial: apenas uma tarefa em execução de cada vez.
+- Geração de ficheiro XML de agendamento.
+- Implementação de testes unitários e funcionais.
+- **Entregáveis**: Código, ficheiros XML de teste, sumário executivo.
+
+### Milestone 2 — Testes Baseados em Propriedades
+- Definição e implementação de propriedades do domínio (ex: recursos não são partilhados simultaneamente, todos os pedidos são agendados).
+- Testes usando ScalaCheck.
+- **Entregáveis**: Código, sumário executivo.
+
+### Milestone 3 — Otimização de Produção
+- Agendamento otimizado (tarefas paralelas, ordem de produção otimizada).
+- Respeito integral pelas restrições de recursos.
+- Novo conjunto de ficheiros XML de teste.
+- **Entregáveis**: Código, ficheiros XML de teste, relatório de projeto.
+
+## Requisitos Técnicos
+
+- **Linguagem:** Scala (programação funcional estrita, sem mutabilidade)
+- **Testes:** ScalaTest, ScalaCheck (unitários, funcionais, propriedades)
+- **XML:** Importação/exportação usando `scala-xml`, com schemas fornecidos (`production.xsd`, `schedule.xsd`)
+- **Cobertura:** Plugin scoverage para análise de cobertura de testes
+- **Execução:** Algoritmos devem aceitar qualquer ficheiro XML de input compatível
+- **Regras:** Não alterar pastas de avaliação automática
+
+## Organização do Repositório
+
+- `src/` — Código-fonte principal (Scala)
+- `files/assessment/` — Ficheiros de teste e exemplos (NÃO ALTERAR onde indicado)
+- `test/` — Testes unitários, funcionais e de propriedade
+- `docs/` — Sumário executivo, relatório de projeto, documentação técnica
+- `README.md` — Este ficheiro
+
+## Documentação
+
+- **Sumário executivo:** Decisões principais, alternativas, justificações, melhorias futuras.
+- **Relatório de projeto:** Análise dos algoritmos, propriedades, uso de programação funcional, limitações.
+
+## Avaliação
+
+- Avaliação automática via comandos sbt.
+- Entregas parciais e finais para cada milestone, com feedback contínuo.
+- Penalização severa para mutabilidade ou plágio.
+
+## Como executar os testes automáticos
+
+```bash
+# Avaliação MS01
+sbt "testOnly pj.assessment.AssessmentTestMS01"
+
+# Avaliação MS03
+sbt "testOnly pj.assessment.AssessmentTestMS03"
+```
+
+
+> **Técnicas Avançadas de Programação — Mestrado em Engenharia Informática, ISEP 2024/2025**
